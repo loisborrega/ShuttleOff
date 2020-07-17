@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://*.fontawesome.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://*.fontawesome.com/; media-src *">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/signup.css" />
+
+    <script src="https://use.fontawesome.com/8bc8e090b5.js"></script>
+
+    <title>SHUTTLE OFF!</title>
+</head>
+<body class="signup-page">
+    <nav class="navbar justify-content-center">
+        <span class="navbar-brand mb-0 align-content-center">
+            <img src="images/logo1.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+            SHUTTLE OFF!
+        </span>
+    </nav>
+
+    <div class="container h-100">
+        <header id="header">
+            <h2>
+                Sign Up
+            </h2>
+            <p>
+                Please fill in this form to create an account!
+            </p>
+        </header>
+        <!-- SignUp Form-->
+        <form id="signup-form" method="post" action="#">
+            <!--Username, Password & Confirm Password-->
+            <div class="form-group col-md d-flex justify-content-center">
+                <input type="text" id="text2" class="form-control" name="username" placeholder="Username" required="required">
+            </div>
+            <div class="form-group col-md d-flex justify-content-center">
+                <input type="text" id="text2" class="form-control" name="password" placeholder="Password" required="required">
+            </div>
+            <div class="form-group col-md d-flex justify-content-center">
+                <input type="text" id="text2" class="form-control" name="confirm_pw" placeholder="Confirm Password" required="required">
+            </div>
+            <!--First Name, Middle Name & Last Name-->
+            <div class="form-row">
+                <div class="form-group col-md-4 d-flex justify-content-center">
+                    <input type="text" class="form-control" name="first_name" placeholder="First Name" required="required">
+                </div>
+                <div class="form-group col-md-4 d-flex justify-content-center">
+                    <input type="text" class="form-control" name="mid_name" placeholder="Middle Name">
+                </div>
+                <div class="form-group col-md-4 pb-0 d-flex justify-content-center">
+                    <input type="text" id="text1" class="form-control" name="last_name" placeholder="Last Name">
+                </div>
+            </div>
+            <!--Address-->
+            <div class="form-row mt-0">
+                <div class="form-group col-md-6 pt-0 d-flex justify-content-center">
+                    <input type="text" class="form-control" name="user_add1" placeholder="Address Line 1" required="required">
+                </div>
+                <div class="form-group col-md-6 pb-0 d-flex justify-content-center">
+                    <input type="text" class="form-control" name="user_add2" placeholder="Address Line 2">
+                </div>
+            </div>
+            <!--Province & City-->
+            <div class="form-row mt-0">
+                <div class="form-group col-md-6 pt-0 d-flex justify-content-center">
+                    <select class="custom-select" name="user_province" required="required">
+                        <option disabled="disabled" selected="selected">Province</option>
+                        <option>NCR</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 pt-0 d-flex justify-content-center">
+                    <select class="custom-select" name="user_city" required="required">
+                        <option disabled="disabled" selected="selected">City</option>
+                        <option>Manila</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+            <!--Gender-->
+            <div class="form-group pb-0 mb-0" for="GenderLabel">
+                <label class="label">
+                    Gender
+                </label>
+            </div>
+            <div class="form-group" id="GenderLabel">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="user_gender" id="gender1" value="option1">
+                    <label class="form-check-label" for="gender1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="user_gender" id="gender2" value="option2">
+                    <label class="form-check-label" for="gender2">Female</label>
+                </div>
+            </div>
+            <!--Submit-->
+            <div class="form-group d-flex justify-content-center">
+                <button type="submit" class="btn btn-block">SIGNUP</button>
+            </div>
+            <!--Login-->
+            <div class="text-center">
+                <span class="txt1">
+                    Already have an account?
+                </span>
+                <a class="txt2" href="index.html">
+                    Login here
+                </a>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="scripts/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+</body>
+</html>
