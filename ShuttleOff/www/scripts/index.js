@@ -2,6 +2,41 @@
 // http://go.microsoft.com/fwlink/?LinkID=397704
 // To debug code on page load in cordova-simulate or on Android devices/emulators: launch your app, set breakpoints, 
 // and then run "window.location.reload()" in the JavaScript Console.
+
+function LoginClicked() {
+    var userInfoJSON = {
+        "userLog": {
+            EmailAdd: $("#emailadd").val(),
+            UserPW: $("#password").val(),
+        }
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:54458/Service1.svc/UserLogin',
+        data: JSON.stringify(userInfoJSON),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        processdata: true,
+        success: function (data) {
+            var value = data;
+            if (value.UserLoginResult == "Verified")
+            {
+                window.close = 'index.html';
+                window.location = 'signUp.html';
+            }
+            else if (value.UserLoginResult == "Unverified")
+            {
+                alert("Incorrect email address or password.");
+                window.location = 'index.html'
+            }
+        },
+        error: function (result) {
+            alert(result.responseText);
+        }
+    });
+}
+
 (function () {
     "use strict";
 

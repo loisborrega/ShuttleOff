@@ -728,7 +728,9 @@ label {
     }
 }
 
-input[type="text"], select,
+input[type="text"], 
+input[type="password"],
+input[type="email"],
 textarea {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -754,12 +756,14 @@ textarea {
     width: 100%;
 }
 
-    input[type="text"]:invalid, select:invalid,
+    input[type="text"]:invalid, input[type="password"]:invalid,
+    input[type="email"]:invalid, select:invalid,
     textarea:invalid {
         box-shadow: none;
     }
 
-    input[type="text"]:focus, select:focus,
+    input[type="text"]:focus, input[type="password"]:focus,
+    input[type="email"]:focus, select:focus,
     textarea:focus {
         -moz-animation: focus 0.1s;
         -webkit-animation: focus 0.1s;
@@ -794,7 +798,8 @@ select {
         display: none;
     }
 
-input[type="text"], select {
+input[type="text"], input[type="password"],
+input[type="email"], select {
     height: 2.3em;
 }
 
@@ -1051,7 +1056,7 @@ button,
 }
 
 /* SignUp Form */
-#text2 {
+#emailadd, #password, #confirm_pw {
     width: 46em;
 }
 
@@ -1075,10 +1080,6 @@ button,
         -ms-flex-direction: column;
         flex-direction: column;
     }
-
-        #signup-form input[type="type"] {
-            width: 100%;
-        }
 
         #signup-form > * {
             margin: 1.25em 0 0 0;

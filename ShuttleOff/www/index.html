@@ -5,7 +5,7 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://*.fontawesome.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://*.fontawesome.com/; media-src *">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://*.fontawesome.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://*.fontawesome.com/; media-src *">-->
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -37,13 +37,13 @@
             <!-- Login Form-->
             <form id="login-form" method="post" action="#">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email Address" />
+                    <input type="email" id="emailadd" class="form-control" placeholder="Email Address" />
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" id="password" class="form-control" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block">LOGIN</button>
+                    <button type="submit" class="btn btn-block" onclick="LoginClicked()">LOGIN</button>
                 </div>
                 <div class="text-center pt-2">
                     <span class="txt1">
@@ -56,7 +56,7 @@
             </form>
         </div>
 
-        <script type="text/javascript" src="scripts/jquery.slim.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.js"></script>
 

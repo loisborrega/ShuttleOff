@@ -5,7 +5,7 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://*.fontawesome.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://*.fontawesome.com/; media-src *">
+    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap:  https://ssl.gstatic.com https://*.fontawesome.com/ 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://*.fontawesome.com/; media-src *">-->
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="format-detection" content="telephone=no">
@@ -17,17 +17,16 @@
     <link rel="stylesheet" type="text/css" href="css/signup.css" />
 
     <script src="https://use.fontawesome.com/8bc8e090b5.js"></script>
-
+    
     <title>SHUTTLE OFF!</title>
 </head>
-<body class="signup-page">
+<body class="signup-page" onload="resetSelection()">
     <nav class="navbar justify-content-center">
         <span class="navbar-brand mb-0 align-content-center">
             <img src="images/logo1.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">
             SHUTTLE OFF!
         </span>
     </nav>
-
     <div class="container h-100">
         <header id="header">
             <h2>
@@ -41,71 +40,59 @@
         <form id="signup-form" method="post" action="#">
             <!--Username, Password & Confirm Password-->
             <div class="form-group col-md d-flex justify-content-center">
-                <input type="text" id="text2" class="form-control" name="username" placeholder="Username" required="required">
+                <input type="email" id="emailadd" class="form-control" name="emailadd" placeholder="Email Address" required="required">
             </div>
             <div class="form-group col-md d-flex justify-content-center">
-                <input type="text" id="text2" class="form-control" name="password" placeholder="Password" required="required">
+                <input type="password" id="password" class="form-control" name="password" placeholder="Password" required="required">
             </div>
             <div class="form-group col-md d-flex justify-content-center">
-                <input type="text" id="text2" class="form-control" name="confirm_pw" placeholder="Confirm Password" required="required">
+                <input type="password" id="confirm_pw" class="form-control" name="confirm_pw" placeholder="Confirm Password" required="required">
             </div>
             <!--First Name, Middle Name & Last Name-->
             <div class="form-row">
                 <div class="form-group col-md-4 d-flex justify-content-center">
-                    <input type="text" class="form-control" name="first_name" placeholder="First Name" required="required">
+                    <input type="text" id="first_name" class="form-control" name="first_name" placeholder="First Name" required="required">
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-center">
-                    <input type="text" class="form-control" name="mid_name" placeholder="Middle Name">
+                    <input type="text" id="mid_name" class="form-control" name="mid_name" placeholder="Middle Name">
                 </div>
                 <div class="form-group col-md-4 pb-0 d-flex justify-content-center">
-                    <input type="text" id="text1" class="form-control" name="last_name" placeholder="Last Name">
+                    <input type="text" id="last_name" class="form-control" name="last_name" placeholder="Last Name">
                 </div>
             </div>
             <!--Address-->
             <div class="form-row mt-0">
                 <div class="form-group col-md-6 pt-0 d-flex justify-content-center">
-                    <input type="text" class="form-control" name="user_add1" placeholder="Address Line 1" required="required">
+                    <input type="text" id="user_add1" class="form-control" name="user_add1" placeholder="Address Line 1" required="required">
                 </div>
                 <div class="form-group col-md-6 pb-0 d-flex justify-content-center">
-                    <input type="text" class="form-control" name="user_add2" placeholder="Address Line 2">
+                    <input type="text" id="user_add2" class="form-control" name="user_add2" placeholder="Address Line 2">
                 </div>
             </div>
             <!--Province & City-->
             <div class="form-row mt-0">
                 <div class="form-group col-md-6 pt-0 d-flex justify-content-center">
-                    <select class="custom-select" name="user_province" required="required">
-                        <option disabled="disabled" selected="selected">Province</option>
+                    <select class="custom-select" id="province" size="1" onchange="setCities()" required="required">
+                        <option value="" disabled="disabled" selected="selected">Province</option>
+                        <option>Bulacan</option>
+                        <option>Cavite</option>
+                        <option>Laguna</option>
                         <option>NCR</option>
-                        <option>...</option>
+                        <option>Pampanga</option>
+                        <option>Rizal</option>
+                        <option>Tarlac</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6 pt-0 d-flex justify-content-center">
-                    <select class="custom-select" name="user_city" required="required">
-                        <option disabled="disabled" selected="selected">City</option>
-                        <option>Manila</option>
-                        <option>...</option>
+                    <select class="custom-select" id="city" size="1" required="required">
+                        <option value="" disabled selected>City</option>
+                        <option></option>
                     </select>
-                </div>
-            </div>
-            <!--Gender-->
-            <div class="form-group pb-0 mb-0" for="GenderLabel">
-                <label class="label">
-                    Gender
-                </label>
-            </div>
-            <div class="form-group" id="GenderLabel">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="user_gender" id="gender1" value="option1">
-                    <label class="form-check-label" for="gender1">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="user_gender" id="gender2" value="option2">
-                    <label class="form-check-label" for="gender2">Female</label>
                 </div>
             </div>
             <!--Submit-->
             <div class="form-group d-flex justify-content-center">
-                <button type="submit" class="btn btn-block">SIGNUP</button>
+                <button type="submit" class="btn btn-block" onclick="return ValidatePW()">SIGNUP</button>
             </div>
             <!--Login-->
             <div class="text-center">
@@ -118,12 +105,12 @@
             </div>
         </form>
     </div>
-    <script type="text/javascript" src="scripts/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/platformOverrides.js"></script>
-    <script type="text/javascript" src="scripts/index.js"></script>
+    <script type="text/javascript" src="scripts/signup.js"></script>
 </body>
 </html>

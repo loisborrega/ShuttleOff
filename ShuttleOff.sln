@@ -5,14 +5,18 @@ VisualStudioVersion = 15.0.28307.1169
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "ShuttleOff", "ShuttleOff\ShuttleOff.jsproj", "{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShuttleOffService", "ShuttleOffService\ShuttleOffService.csproj", "{D8574CC2-DD03-455C-B40F-A575902F5451}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Android = Debug|Android
+		Debug|Any CPU = Debug|Any CPU
 		Debug|iOS = Debug|iOS
 		Debug|Windows-ARM = Debug|Windows-ARM
 		Debug|Windows-x64 = Debug|Windows-x64
 		Debug|Windows-x86 = Debug|Windows-x86
 		Release|Android = Release|Android
+		Release|Any CPU = Release|Any CPU
 		Release|iOS = Release|iOS
 		Release|Windows-ARM = Release|Windows-ARM
 		Release|Windows-x64 = Release|Windows-x64
@@ -22,6 +26,7 @@ Global
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Debug|Android.ActiveCfg = Debug|Android
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Debug|Android.Build.0 = Debug|Android
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Debug|Android.Deploy.0 = Debug|Android
+		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Debug|Any CPU.ActiveCfg = Debug|Android
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Debug|iOS.ActiveCfg = Debug|iOS
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Debug|iOS.Build.0 = Debug|iOS
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Debug|iOS.Deploy.0 = Debug|iOS
@@ -37,6 +42,7 @@ Global
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|Android.ActiveCfg = Release|Android
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|Android.Build.0 = Release|Android
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|Android.Deploy.0 = Release|Android
+		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|Any CPU.ActiveCfg = Release|Android
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|iOS.ActiveCfg = Release|iOS
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|iOS.Build.0 = Release|iOS
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|iOS.Deploy.0 = Release|iOS
@@ -49,6 +55,30 @@ Global
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|Windows-x86.ActiveCfg = Release|Windows-x86
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|Windows-x86.Build.0 = Release|Windows-x86
 		{AA0CE789-FE20-4C47-A698-D94A1D09DAE0}.Release|Windows-x86.Deploy.0 = Release|Windows-x86
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Android.ActiveCfg = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Android.Build.0 = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|iOS.ActiveCfg = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|iOS.Build.0 = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Windows-ARM.ActiveCfg = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Windows-ARM.Build.0 = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Windows-x64.ActiveCfg = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Windows-x64.Build.0 = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Debug|Windows-x86.Build.0 = Debug|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Android.ActiveCfg = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Android.Build.0 = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|iOS.ActiveCfg = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|iOS.Build.0 = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-ARM.ActiveCfg = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-ARM.Build.0 = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-x64.ActiveCfg = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-x64.Build.0 = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-x86.ActiveCfg = Release|Any CPU
+		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
