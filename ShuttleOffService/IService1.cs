@@ -31,6 +31,7 @@ namespace ShuttleOffService
     {
         private string emailadd, userpw, fname, mname, lname, addline1, addline2, province, city;
         private int userid;
+        private DateTime datecreated;
 
         [DataMember]
         public int UserID { get { return userid; } set { userid = value; } }
@@ -52,6 +53,8 @@ namespace ShuttleOffService
         public string Province { get { return province; } set { province = value; } }
         [DataMember]
         public string City { get { return city; } set { city = value; } }
+        [DataMember]
+        public DateTime DateCreated { get { return datecreated; } set { datecreated = value; } }
 
     }
 

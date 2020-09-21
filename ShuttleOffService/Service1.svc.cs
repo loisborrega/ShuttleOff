@@ -44,6 +44,7 @@ namespace ShuttleOffService
                     logUser.AddLine2 = dr[7].ToString();
                     logUser.Province = dr[8].ToString();
                     logUser.City = dr[9].ToString();
+                    logUser.DateCreated = DateTime.Parse(dr[10].ToString());
                 }
                 if (dr.Read())
                 {
