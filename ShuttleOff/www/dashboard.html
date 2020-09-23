@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+    <script src="https://use.fontawesome.com/8bc8e090b5.js"></script>
+</head>
+<body>
+    <div class="content">
+        <header class="app-header">
+            <div class="container">
+                <i class="fas fa-bars" onclick="openNav()" style="cursor: pointer;"> Menu</i>
+                <img src="images/logo1.png" alt="" class="logo">
+            </div>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times</a>
+                <a href="#" onclick="closeNav()"><i class="fas fa-search-location"> </i> <span>Play</span></a>
+                <a href="profile.html"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
+                <a href="#"><i class="fas fa-shuttlecock"></i><span>My Courts</span></a>
+                <a href="#"><i class="far fa-calendar-alt"></i><span>Schedules</span></a>
+                <a href="index.html"><i class="fas fa-power-off"></i> <span>Log Out</span></a>
+            </div>
+        </header>
+        <div id="filter_sidebar" class="filter_sidebar">
+            <div class="filter_wrapper">
+                <div class="filter_header">
+                    <div class="filter_header_container">
+                        <h3 onclick="closeFilterTab()">Cancel</h3>
+                        <h3 onclick="reloadProcNavContent()">Apply</h3>
+                    </div>
+                </div>
+                <div class="filter_content">
+                    <div class="filter_content_wrapper">
+                        <div class="sortBox-container">
+                            <div class="sortBox-wrapper">
+                                <div class="sortBox-header">
+                                    <div class="sortBox-header-wrapper">
+                                        <h3>Sort By</h3>
+                                    </div>
+                                </div>
+                                <div class="sortBox">
+                                    <div class="sortBox-location-wrap">
+                                        <div class="sortBox-location">
+                                            <div class="sortBox-radioBtn">
+                                                <input id="location" name="sort_crit" type="radio">
+                                                <div class="radioBtn-item-wrap">
+                                                    <i class="fas fa-search-location"></i>
+                                                    <h3>Name</h3>
+                                                </div>
+                                            </div>
+                                            <div class="sortBox-radioBtn">
+                                                <input id="city" name="sort_crit" type="radio">
+                                                <div class="radioBtn-item-wrap">
+                                                    <i class="fas fa-city"></i>
+                                                    <h3>City</h3>
+                                                </div>
+                                            </div>
+                                            <div class="sortBox-radioBtn">
+                                                <input id="province" name="sort_crit" type="radio">
+                                                <div class="radioBtn-item-wrap">
+                                                    <i class="fas fa-home"></i>
+                                                    <h3>Province</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sortBox-rating">
+                                        <div onclick="flipRatingSortIcon()" class="sortBox-rating-wrap">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-sort-amount-down"></i>
+                                            <h3>Ratings</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterBox-container">
+                            <div class="filterBox-container-wrapper">
+                                <div class="filterBox-header">
+                                    <div class="filterBox-header-container">
+                                        <h3>Filters</h3>
+                                    </div>
+                                </div>
+                                <div class="filterBox">
+                                    <div class="filterBox-wrap">
+                                        <div class="playerAmount">
+                                            <div class="playerAmount-wrapper">
+                                                <div class="playerAmount-radioBtn">
+                                                    <input id="min-player" name="players" type="radio">
+                                                    <div class="player-amount-wrap">
+                                                        <i class="fas fa-user"></i>
+                                                        <h3>&lt 4</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="playerAmount-radioBtn">
+                                                    <input id="mid-player" name="players" type="radio">
+                                                    <div class="player-amount-wrap">
+                                                        <i class="fas fa-user-friends"></i>
+                                                        <h3>4 to 8</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="playerAmount-radioBtn">
+                                                    <input id="max-player" name="players" type="radio">
+                                                    <div class="player-amount-wrap">
+                                                        <i class="fas fa-users"></i>
+                                                        <h3>&gt 8</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sliderBox">
+                                            <div class="sliderBox-wrap">
+                                                <div class="sliderHeader-container">
+                                                    <h3>Start: 12 AM</h3>
+                                                    <div class="exchange_slider_container">
+                                                        <input onclick="flipSliders()" type="checkbox" id="exchange_sliders">
+                                                        <i class="fas fa-exchange-alt"></i>
+                                                    </div>
+                                                    <h3>End: 11 PM</h3>
+                                                </div>
+                                                <div class="slider">
+                                                    <div class="slider-contents">
+                                                        <input oninput="setLeftValue()" type="range" id="input-left" min="0" max="23" value="0">
+                                                        <input oninput="setRightValue()" type="range" id="input-right" min="0" max="23" value="23">
+                                                        <div class="track"></div>
+                                                        <div class="range"></div>
+                                                        <div class="thumb left"></div>
+                                                        <div class="thumb right"></div>
+                                                    </div>
+                                                    <h3>24 Hours</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reset-btn">
+                            <div onclick="setDefaultValues()" class="reset-btn-wrap">
+                                <h3>Reset Values</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-wrapper" class="content_wrapper">
+            <div class="dashboard-container">
+                <div class="slideshow-wrapper">
+                    <div class="slideshow-item fade">
+                        <img src="../www/images/bc1.jpg " alt="">
+                    </div>
+                    <div class="slideshow-item fade">
+                        <img src="../www/images/bc2.jpg " alt="">
+                    </div>
+                    <div class="slideshow-item fade">
+                        <img src="../www/images/bc3.jpg " alt="">
+                    </div>
+                </div>
+                <div id="logo_mid" class="logo-mid">
+                    <i class="fas fa-search-location"> </i>
+                    <h2>Find a Court</h2>
+                </div>
+                <div class="disp-band">
+                    <div class="disp-band-wrapper">
+                        <div id="time-disp">
+                            <h3>TIME</h3>
+                            <h4 id="time_now">02:46</h4>
+                        </div>
+                        <div class="txtBox-container">
+                            <input id="txtBox_input" type="text" placeholder="Name, City, Province..">
+                            <i onclick="openProcTab()" class="fas fa-search"></i>
+                        </div>
+                        <div id="cal-disp">
+                            <h3 id="day_now">WED</h3>
+                            <h4 id="date_now">AUG 28</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="proc_nav" class="proceed_nav">
+            <div class="proceed_nav_wrapper">
+                <div class="proc_header">
+                    <div class="proc_header_container">
+                        <i class="fas fa-arrow-left" onclick="closeProcTab()"></i>
+                        <h2>Results</h2>
+                        <i onclick="openFilterTab()" class="fas fa-filter"></i>
+                    </div>
+                </div>
+                <div class="proc_nav_content">
+                    <div class="proc_nav_content_wrapper" id="proc_nav_content_wrapper">
+                        <h3 id="No_Results">No Results</h3>
+                        <!-- <div onclick ="checkFocusedPlace()" tabindex = "0" class="place">
+                            <img src="../www/images/bc1.jpg" alt="">
+                            <h3>Em's Court</h3>
+                            <div class="place-star-container">
+                                <div class="place-star-wrap">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modals-->
+    <div id="modal-result-pop-up" class="modal-result-pop-up">
+        <div class="mod-wrapper">
+            <div class="mod-header">
+                <!-- <h2 onclick="closeDetModal()">Cancel</h2> -->
+                <h3>Create Reservation</h3>
+            </div>
+            <div class="mod-content">
+                <div class="picture">
+                    <div class="picture_container">
+                        <img id="loc_pic" src="./images/bc1.jpg" alt="">
+                    </div>
+                </div>
+                <div id="review-container" class="review-container">
+                    <div class="review-header">
+                        <div class="review-header-wrap">
+                            <h3>Reviews For El's Court</h3>
+                            <p>3 Reviews</p>
+                        </div>
+                    </div>
+                    <div id="review-wrapper" class="review-wrapper">
+                        <div class="review-content">
+                            <div class="star-container">
+                                <div class="star-wrap">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="feedback-container">
+                                <h3>By Name 1</h3>
+                                <p>50 million characters here</p>
+                                <h5>01:45 Aug 14, 2020</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mod-det" id="mod-det">
+                    <div class="mod-det-wrap">
+                        <div class="details-header">
+                            <h1>Details</h1>
+                        </div>
+                        <div class="details-content">
+                            <div class="details-content-wrapper">
+                                <div class="details hori">
+                                    <h2>Name:&nbsp</h2>
+                                    <input type="text" name="place_details" id="place_name" readonly>
+                                </div>
+                                <div class="details hori">
+                                    <h2>Owner:&nbsp</h2>
+                                    <input type="text" name="place_details" id="place_owner" readonly>
+                                </div>
+
+                                <div class="details hori">
+                                    <h2>City:&nbsp</h2>
+                                    <input type="text" name="place_details" id="place_city" readonly>
+                                </div>
+                                <div class="details hori">
+                                    <h2>Province:&nbsp</h2>
+                                    <input type="text" name="place_details" id="place_province" readonly>
+                                </div>
+                                <div class="details hori">
+                                    <h2>Max Players:&nbsp</h2>
+                                    <input type="text" name="place_details" id="place_players" readonly>
+                                </div>
+                                <div class="details">
+                                    <h2>Address</h2>
+                                    <p>Some long street name, another long street name, the actual street, my house</p>
+                                </div>
+                                <div class="details">
+                                    <h2>Description</h2>
+                                    <p>This is an awesome court. I just want to make this long enought to test the overflow of this item. Is this long enough? I think so. Ok, I'm going to stop now.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mod-button">
+                    <div class="mod-btn-container">
+                        <div class="btn_create_res">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div onclick="closeDetModal()" class="btn_cancel_res">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div onclick="openReviews()" class="btn_review">
+                            <i class="far fa-comment-alt"></i>
+                            <p>Reviews</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+
+    <script src="https://kit.fontawesome.com/fec759ef55.js" crossorigin="anonymous"></script>
+    <script src="../www/scripts/dashboard.js"></script>
+
+</body>
+</html>

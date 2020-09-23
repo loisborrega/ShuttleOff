@@ -1,0 +1,243 @@
+﻿:root {
+    --primary-color: #006666;
+    --secondary-color: #f0f7f7;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.content {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+}
+
+.app-header {
+    background-color: #006666;
+    width: 100%;
+    height: 8%;
+    box-shadow: 3px 3px 10px #888;
+}
+
+    .app-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 0.5rem 0 0.5rem;
+        overflow: none;
+    }
+
+    .app-header .logo {
+        width: 2.8rem;
+    }
+
+    .app-header .container i {
+        color: whitesmoke;
+        cursor: pointer;
+    }
+
+/*Side nav*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    float: left;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+    .sidenav a {
+        padding: 0.4rem;
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: whitesmoke;
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 0.5rem;
+        width: 90%;
+        /* transition: 0.3s; */
+    }
+
+    .sidenav i {
+        padding-right: 2rem;
+    }
+
+    .sidenav a span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .sidenav a span::after {
+            font-size: 25px;
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .sidenav a:hover span {
+        padding-right: 25px;
+    }
+
+        .sidenav a:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+    .sidenav .closebtn {
+        justify-content: flex-end;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        transition: 0.5s;
+    }
+
+        .sidenav .closebtn:hover {
+            opacity: 0.6;
+        }
+
+.profile {
+    position: absolute;
+    top: 8%;
+    height: 92%;
+    width: 100%;
+}
+
+.profile-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-header {
+    position: absolute;
+    width: 100%;
+    height: 20%;
+}
+
+.profile-header-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-logo-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+    .profile-logo-container i {
+        color: grey;
+        font-size: 3.4rem;
+        padding-bottom: 0.3rem;
+    }
+
+.profile-joined-container {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top: 80%;
+    height: 20%;
+    align-items: center;
+    justify-content: center;
+}
+
+    .profile-joined-container i {
+        font-size: 1rem;
+        padding-right: 0.3rem;
+    }
+
+.profile-body {
+    position: absolute;
+    top: 20%;
+    height: 80%;
+    width: 100%;
+}
+
+.profile-detail-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+    margin-top: 1.2rem;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    padding: 0 2rem 2rem 2rem;
+}
+
+    .profile-content h3 {
+        display: flex;
+        align-self: flex-start;
+        font-size: 1.15rem;
+        color: var(--primary-color);
+    }
+
+    .profile-content input {
+        width: 100%;
+        font-size: 0.9rem;
+        outline: none;
+        background-color: var(--secondary-color);
+        border: none;
+        border-bottom: 1px solid var(--primary-color);
+        transition: 0.3s;
+    }
+
+        .profile-content input:focus {
+            -webkit-box-shadow: 0 1px 0 #024747;
+            -moz-box-shadow: 0 1px 0 #024747;
+            box-shadow: 0 1px 0 #182b2b;
+        }
+
+    .profile-content h5 {
+        font-size: 1rem;
+        color: var(--primary-color);
+        cursor: pointer;
+        display: flex;
+        align-self: flex-start;
+    }
