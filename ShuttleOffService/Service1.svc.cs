@@ -22,30 +22,29 @@ namespace ShuttleOffService
         // VERIFY LOGIN
         public string UserLogin(UserDetails userLog)
         {
-            UserDetails logUser = new UserDetails();
+            //UserDetails logUser = new UserDetails();
             using (var connection = new SqlConnection(connString))
             {
-                string message, resultVal;
+                string message;
+                //string resultVal;
                 connection.Open();
                 SqlCommand cmd = new SqlCommand("Main.VerifyLogin", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@EmailAdd", userLog.EmailAdd);
                 cmd.Parameters.AddWithValue("@UserPW", userLog.UserPW);
                 SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
+                /*while (dr.Read())
                 {
                     logUser.UserID = int.Parse(dr[0].ToString());
                     logUser.EmailAdd = dr[1].ToString();
                     logUser.UserPW = dr[2].ToString();
                     logUser.FName = dr[3].ToString();
                     logUser.MName = dr[4].ToString();
-                    logUser.LName = dr[5].ToString();
-                    logUser.AddLine1 = dr[6].ToString();
-                    logUser.AddLine2 = dr[7].ToString();
-                    logUser.Province = dr[8].ToString();
-                    logUser.City = dr[9].ToString();
-                    logUser.DateCreated = DateTime.Parse(dr[10].ToString());
-                }
+                    logUser.LName = dr[5].ToString();                    
+                    logUser.Province = dr[6].ToString();
+                    logUser.City = dr[7].ToString();
+                    logUser.DateCreated = DateTime.Parse(dr[8].ToString());
+                }*/
                 if (dr.Read())
                 {
                     message = "Verified";
@@ -76,9 +75,7 @@ namespace ShuttleOffService
                 command.Parameters.Add("@UserPW", SqlDbType.NVarChar, 15).Value = userInfo.UserPW.ToDbParameter();
                 command.Parameters.Add("@FName", SqlDbType.NVarChar, 50).Value = userInfo.FName.ToDbParameter();
                 command.Parameters.Add("@MName", SqlDbType.NVarChar, 50).Value = userInfo.MName.ToDbParameter();
-                command.Parameters.Add("@LName", SqlDbType.NVarChar, 50).Value = userInfo.LName.ToDbParameter();
-                command.Parameters.Add("AddLine1", SqlDbType.NVarChar, 120).Value = userInfo.AddLine1.ToDbParameter();
-                command.Parameters.Add("AddLine2", SqlDbType.NVarChar, 120).Value = userInfo.AddLine2.ToDbParameter();
+                command.Parameters.Add("@LName", SqlDbType.NVarChar, 50).Value = userInfo.LName.ToDbParameter();                
                 command.Parameters.Add("Province", SqlDbType.NVarChar, 90).Value = userInfo.Province.ToDbParameter();
                 command.Parameters.Add("City", SqlDbType.NVarChar, 50).Value = userInfo.City.ToDbParameter();
                 command.Parameters.AddWithValue("Date", SqlDbType.DateTime).Value = date.ToDbParameter();

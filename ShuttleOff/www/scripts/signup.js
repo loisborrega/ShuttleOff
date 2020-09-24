@@ -49,9 +49,7 @@ function SubmitClicked() {
             UserPW: $("#password").val(),
             FName: $("#first_name").val(),
             MName: $("#mid_name").val(),
-            LName: $("#last_name").val(),
-            AddLine1: $("#user_add1").val(),
-            AddLine2: $("#user_add2").val(),
+            LName: $("#last_name").val(),            
             Province: $("#province").val(),
             City: $("#city").val()
         }

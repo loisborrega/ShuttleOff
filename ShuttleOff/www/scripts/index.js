@@ -3,7 +3,7 @@
 // To debug code on page load in cordova-simulate or on Android devices/emulators: launch your app, set breakpoints, 
 // and then run "window.location.reload()" in the JavaScript Console.
 
-/*function LoginClicked() {
+function LoginClicked() {
     var userInfoJSON = {
         "userLog": {
             EmailAdd: $("#emailadd").val(),
@@ -35,7 +35,7 @@
             alert(result.responseText);
         }
     });
-}*/
+}
 
 (function () {
     "use strict";
@@ -192,10 +192,10 @@
                 $submit.disabled = false;
 
                 // Show message.
-                $message._show('success', 'Thank you!');
+                //$message._show('success', 'Thank you!');
                 //$message._show('failure', 'Something went wrong. Please try again.');
-                window.open("./dashboard.html");
-                this.close();
+                //window.open("./dashboard.html");
+                //this.close();
             }, 750);
 
         });

@@ -29,7 +29,7 @@ namespace ShuttleOffService
     [DataContract]
     public class UserDetails
     {
-        private string emailadd, userpw, fname, mname, lname, addline1, addline2, province, city;
+        private string emailadd, userpw, fname, mname, lname, province, city;
         private int userid;
         private DateTime datecreated;
 
@@ -44,11 +44,7 @@ namespace ShuttleOffService
         [DataMember]
         public string MName { get { return mname; } set { mname = value; } }
         [DataMember]
-        public string LName { get { return lname; } set { lname = value; } }
-        [DataMember]
-        public string AddLine1 { get { return addline1; } set { addline1 = value; } }
-        [DataMember]
-        public string AddLine2 { get { return addline2; } set { addline2 = value; } }
+        public string LName { get { return lname; } set { lname = value; } }        
         [DataMember]
         public string Province { get { return province; } set { province = value; } }
         [DataMember]
