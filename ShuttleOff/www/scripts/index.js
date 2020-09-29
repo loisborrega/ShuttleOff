@@ -14,22 +14,36 @@ function LoginClicked() {
     $.ajax({
         type: 'POST',
         url: 'http://localhost:54458/Service1.svc/UserLogin',
-        data: JSON.stringify(userInfoJSON),
+        data: JSON.stringify(userInfoJSON),        
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         processdata: true,
         success: function (data) {
-            var value = data;
+            var userDetails = JSON.parse(data.UserLoginResult);
+            
+            localStorage.setItem("UserId", userDetails.UserID);
+            localStorage.setItem("EmailAddress", userDetails.EmailAdd);
+            localStorage.setItem("UserPassword", userDetails.UserPW);
+            localStorage.setItem("FirstName", userDetails.FName);
+            localStorage.setItem("MiddleName", userDetails.MName);
+            localStorage.setItem("LastName", userDetails.LName);
+            localStorage.setItem("UserProvince", userDetails.Province);
+            localStorage.setItem("UserCity", userDetails.City);
+            localStorage.setItem("UserCreated", userDetails.DateCreated);
+
+            window.close = "index.html";
+            window.location = "dashboard.html";
+            /*var value = data;
             if (value.UserLoginResult == "Verified")
             {
                 window.close = 'index.html';
-                window.location = 'dashboard.html';
+                window.location = "dashboard.html";
             }
             else if (value.UserLoginResult == "Unverified")
             {
                 alert("Incorrect email address or password.");
-                window.location = 'index.html';
-            }
+                window.location = "index.html";
+            }*/
         },
         error: function (result) {
             alert(result.responseText);

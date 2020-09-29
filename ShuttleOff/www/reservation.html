@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <title>Reservation</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/reservation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+    <script src="https://use.fontawesome.com/8bc8e090b5.js"></script>
+</head>
+<body>
+    <div class="content">
+        <div class="app-header">
+            <div class="container">
+                <i class="fas fa-bars" onclick="openNav()"> Menu</i>
+                <img src="images/logo1.png" alt="" class="logo">
+            </div>
+            <!-- sidenav -->
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times</a>
+                <a href="dashboard.html"><i class="fas fa-search-location"> </i> <span>Play</span></a>
+                <a href="profile.html"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
+                <a onclick="closeNav()"><i class="far fa-calendar-alt"></i><span>Reservations</span></a>
+                <a href="index.html"><i class="fas fa-power-off"></i> <span>Log Out</span></a>
+            </div>
+        </div>
+        <!-- Active and History Panels -->
+        <div class="reservation-panel">
+            <div class="panel-wrapper">
+                <div class="btn-container">
+                    <div class="btn-wrapper">
+                        <span id="btn-selection-indicator"></span>
+                        <button onclick="showActivePane()" id="btn-active">Active</button>
+                        <button onclick="showHistoryPane()" id="btn-history">History</button>
+                    </div>
+                </div>
+                <div class="pane-container">
+                    <div class="pane-wrap">
+                        <div id="pane1">
+                            <div class="pane1-wrap">
+                                <h2 class="empty-pane">Nothing to see here...</h2>
+                                <!-- pane-content -->
+                                <!-- <div tabindex = 0 class="pane1-content">
+                                    <div class="pane1-content-wrap">
+                                        <i class="fas fa-map-marker-alt">&nbsp;Court Name</i>
+                                        <i class="far fa-clock">&nbsp;Time</i>
+                                        <span><i class="far fa-trash-alt"></i></span>
+                                    </div>
+                                </div>
+                                <div class="court-address">
+                                    <h4>Address</h4>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente dicta cumque laboriosam exercitationem suscipit rem perferendis aspernatur officia odio optio deleniti debitis eos beatae in, rerum cum tempore quia numquam.</p>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div id="pane2">
+                            <div class="pane2-wrap">
+                                <h2 class="empty-pane">Nothing to see here...</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+
+    <script src="https://kit.fontawesome.com/fec759ef55.js" crossorigin="anonymous"></script>
+    <script src="scripts/reservation.js"></script>
+</body>
+</html>

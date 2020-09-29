@@ -63,8 +63,18 @@ function SubmitClicked() {
         dataType: 'json',
         processdata: true,
         success: function (data) {
-            alert("Registered!");
-            window.location = 'index.html'
+            var value = data;
+            
+            if (value.AddUserDetailsResult == "SUCCESSFUL")
+            {
+                alert("Registered!");
+                window.location = "index.html";
+            }
+            else if (value.AddUserDetailsResult == "ERROR")
+            {
+                alert("The email address or account is already existing.");
+                window.location = "signUp.html";
+            }
         },
         error: function (result) {
             alert(result.responseText);

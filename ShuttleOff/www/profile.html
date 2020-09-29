@@ -2,43 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />-->
     <link rel="stylesheet" href="css/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
     <script src="https://use.fontawesome.com/8bc8e090b5.js"></script>
 </head>
-<body>
+<body onload="profileOnLoad()">
     <div class="content">
         <div class="app-header">
             <div class="container">
                 <i class="fas fa-bars" onclick="openNav()"> Menu</i>
                 <img src="images/logo1.png" alt="" class="logo">
             </div>
+            <!-- sidenav -->
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times</a>
                 <a href="dashboard.html"><i class="fas fa-search-location"> </i> <span>Play</span></a>
                 <a onclick="closeNav()"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
-                <a href="#"><i class="fas fa-shuttlecock"></i><span>My Courts</span></a>
-                <a href="#"><i class="far fa-calendar-alt"></i><span>Schedules</span></a>
+                <a href="reservation.html"><i class="far fa-calendar-alt"></i><span>Reservations</span></a>
                 <a href="index.html"><i class="fas fa-power-off"></i> <span>Log Out</span></a>
             </div>
         </div>
         <div class="profile">
             <div class="profile-wrapper">
+                <!-- Main Profile Body -->
                 <div class="profile-header">
                     <div class="profile-header-wrapper">
                         <div class="profile-logo-container">
                             <i class="fas fa-user-circle"></i>
-                            <h5>Honki.Dori05</h5>
+                            <h5 id="FirstNameH5"></h5>
                         </div>
-                        <div class="profile-joined-container">
-                            <i class="far fa-calendar-alt"></i>
-                            <h6>Joined December 2019</h6>
+                        <div class="join-loc-container">
+                            <div class="join-loc-wrap">                                
+                                <div class="profile-location-container">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h6 id="UserLocH6"></h6>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -46,17 +51,93 @@
                     <div class="profile-detail-container">
                         <div class="profile-content">
                             <h3>Name</h3>
-                            <input type="text" id="Name" placeholder="Name" readonly>
-                        </div>                        
+                            <input type="text" id="FullName" placeholder="Name" readonly>
+                        </div>
                         <div class="profile-content">
                             <h3>Email</h3>
-                            <input type="text" id="email" placeholder="meow@gmail.com" readonly>
+                            <input type="text" id="email" placeholder="Email Address" readonly>
                         </div>
                         <div class="profile-content">
                             <h5>Become a Court Owner</h5>
                         </div>
                         <div class="profile-content">
-                            <a href="#" class="h5">Edit Profile</a>
+                            <h5 onclick="openEditProfile()">Edit Profile</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- Edit Profile Panel -->
+                <div class="edit-profile" id="edit-profile">
+                    <div class="edit-profile-wrapper">
+                        <div class="edit-profile-header">
+                            <div class="edit-profile-header-wrapper">
+                                <h1 onclick="closeEditProfile()">&times</h1>
+                                <h3>EDIT PROFILE</h3>
+                            </div>
+                        </div>
+                        <div class="edit-profile-acc-info">
+                            <div class="edit-profile-acc-info-wrapper">
+                                <h2>ACCOUNT INFORMATION</h2>
+                                <!-- information[0] FIRST NAME-->
+                                <div class="profile-info">
+                                    <h4>First Name</h4>
+                                    <input type="text" id="first_name" name="information">
+                                </div>
+                                <!-- information[1] MIDDLE NAME-->
+                                <div class="profile-info">
+                                    <h4>Middle Name</h4>
+                                    <input type="text" id="mid_name" name="information">
+                                </div>
+                                <!-- information[2] LAST NAME-->
+                                <div class="profile-info">
+                                    <h4>Last Name</h4>
+                                    <input type="text" id="last_name" name="information">
+                                </div>
+                                <!-- information[3] PROVINCE -->
+                                <div class="profile-info">
+                                    <h4>Province</h4>
+                                    <select id="province" name="information" onchange="setCities()">
+                                        <!-- <option value="">None</option> -->
+                                    </select>
+                                </div>
+                                <!-- information[4] CITY -->
+                                <div class="profile-info">
+                                    <h4>City</h4>
+                                    <select id="city" name="information">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                                <h5 id="reset_fields">Reset Fields</h5>
+                                <h5 onclick="UpdateUserDetailsClicked()" id="sav_chngs">Save Changes</h5>
+                                <h5 onclick="openChangePassPanel()" id="chng_pass">Change Password</h5>
+                                <h5 id="del_acc">Delete Account</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Change Password Panel -->
+                <div id="changepass-panel" class="changepass-panel">
+                    <div class="changepass-header">
+                        <div class="changepass-header-wrap">
+                            <h1 onclick="closeChangePassPanel()">&times</h1>
+                            <h3>CHANGE PASSWORD</h3>
+                        </div>
+                    </div>
+                    <div class="changepass-body">
+                        <div class="changepass-body-wrap">
+                            <div class="pass-info">
+                                <h4>Current Password</h4>
+                                <input type="password" id="current_pw" name="password">
+                            </div>
+                            <div class="pass-info">
+                                <h4>New Password</h4>
+                                <input type="password" id="new_pw" name="password">
+                            </div>
+                            <div class="pass-info">
+                                <h4>Confirm Password</h4>
+                                <input type="password" id="confirm_pw" name="password">
+                            </div>
+                            <h5 onclick="ValidateCurrentPW()" id="chng_pass_confirm">Confirm</h5>
+                            <h5 onclick="closeChangePassPanel()" id="chng_pass_cancel">Cancel</h5>
                         </div>
                     </div>
                 </div>
@@ -66,11 +147,11 @@
 
     <!--Scripts-->
     <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <!--<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>-->
     <script type="text/javascript" src="scripts/index.js"></script>
 
     <script src="https://kit.fontawesome.com/fec759ef55.js" crossorigin="anonymous"></script>

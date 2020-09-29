@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using System.ServiceModel.Activation;
+using Newtonsoft.Json;
 
 namespace ShuttleOffService
 {
@@ -19,48 +20,49 @@ namespace ShuttleOffService
     {
         private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
 
-        // VERIFY LOGIN
+        // VERIFY LOGIN AND GET USER DETAILS        
         public string UserLogin(UserDetails userLog)
-        {
-            //UserDetails logUser = new UserDetails();
-            using (var connection = new SqlConnection(connString))
-            {
-                string message;
-                //string resultVal;
-                connection.Open();
-                SqlCommand cmd = new SqlCommand("Main.VerifyLogin", connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@EmailAdd", userLog.EmailAdd);
-                cmd.Parameters.AddWithValue("@UserPW", userLog.UserPW);
-                SqlDataReader dr = cmd.ExecuteReader();
-                /*while (dr.Read())
-                {
-                    logUser.UserID = int.Parse(dr[0].ToString());
-                    logUser.EmailAdd = dr[1].ToString();
-                    logUser.UserPW = dr[2].ToString();
-                    logUser.FName = dr[3].ToString();
-                    logUser.MName = dr[4].ToString();
-                    logUser.LName = dr[5].ToString();                    
-                    logUser.Province = dr[6].ToString();
-                    logUser.City = dr[7].ToString();
-                    logUser.DateCreated = DateTime.Parse(dr[8].ToString());
-                }*/
-                if (dr.Read())
-                {
-                    message = "Verified";
-                }
-                else
-                {
-                    message = "Unverified";
+        {            
+            UserDetails logUser = new UserDetails();
+            string resultVal;
+            try
+            {                
+                using (var connection = new SqlConnection(connString))
+                {                    
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand("Main.VerifyLogin", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("EmailAdd", userLog.EmailAdd);
+                    cmd.Parameters.AddWithValue("UserPW", userLog.UserPW);
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        logUser.UserID = int.Parse(dr[0].ToString());
+                        logUser.EmailAdd = dr[1].ToString();
+                        logUser.UserPW = dr[2].ToString();
+                        logUser.FName = dr[3].ToString();
+                        logUser.MName = dr[4].ToString();
+                        logUser.LName = dr[5].ToString();
+                        logUser.Province = dr[6].ToString();
+                        logUser.City = dr[7].ToString();
+                        logUser.DateCreated = DateTime.Parse(dr[8].ToString());
+                    }           
+                                     
+                    connection.Close();                    
                 }
 
-                //resultVal = JsonConvert.SerializeObject(logUser);
-                //Can't pass data yet, I'm having a problem with installing newtonsoft. - lois 
-                connection.Close();
-                return message;
+                resultVal = JsonConvert.SerializeObject(logUser);
             }
-        }
+            catch (Exception ex)
+            {
+                resultVal = ex.Message;
+            }
 
+            return resultVal;
+        }
+        
         // ADD USER DETAILS
         public string AddUserDetails(UserDetails userInfo)
         {
@@ -71,11 +73,11 @@ namespace ShuttleOffService
                 var date = DateTime.Now;
                 connection.Open();
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add("@EmailAdd", SqlDbType.NVarChar, 50).Value = userInfo.EmailAdd.ToDbParameter();
-                command.Parameters.Add("@UserPW", SqlDbType.NVarChar, 15).Value = userInfo.UserPW.ToDbParameter();
-                command.Parameters.Add("@FName", SqlDbType.NVarChar, 50).Value = userInfo.FName.ToDbParameter();
-                command.Parameters.Add("@MName", SqlDbType.NVarChar, 50).Value = userInfo.MName.ToDbParameter();
-                command.Parameters.Add("@LName", SqlDbType.NVarChar, 50).Value = userInfo.LName.ToDbParameter();                
+                command.Parameters.Add("EmailAdd", SqlDbType.NVarChar, 50).Value = userInfo.EmailAdd.ToDbParameter();
+                command.Parameters.Add("UserPW", SqlDbType.NVarChar, 15).Value = userInfo.UserPW.ToDbParameter();
+                command.Parameters.Add("FName", SqlDbType.NVarChar, 50).Value = userInfo.FName.ToDbParameter();
+                command.Parameters.Add("MName", SqlDbType.NVarChar, 50).Value = userInfo.MName.ToDbParameter();
+                command.Parameters.Add("LName", SqlDbType.NVarChar, 50).Value = userInfo.LName.ToDbParameter();                
                 command.Parameters.Add("Province", SqlDbType.NVarChar, 90).Value = userInfo.Province.ToDbParameter();
                 command.Parameters.Add("City", SqlDbType.NVarChar, 50).Value = userInfo.City.ToDbParameter();
                 command.Parameters.AddWithValue("Date", SqlDbType.DateTime).Value = date.ToDbParameter();
@@ -87,12 +89,87 @@ namespace ShuttleOffService
                 }
                 else
                 {
-                    message = "ERROR! The account is already existing.";
+                    message = "ERROR";
                 }
                 connection.Close();
                 return message;
             }
         }
+
+        //UPDATE USER DETAILS
+        public string UpdateUserDetails(UserDetails userInfo)
+        {
+            string message;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connString))
+                using (SqlCommand command = new SqlCommand("Main.UpdateUserDetailsByUserID", connection))
+                {
+                    connection.Open();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("UserId", SqlDbType.Int).Value = userInfo.UserID.ToDbParameter();
+                    command.Parameters.Add("FName", SqlDbType.NVarChar, 50).Value = userInfo.FName.ToDbParameter();
+                    command.Parameters.Add("MName", SqlDbType.NVarChar, 50).Value = userInfo.MName.ToDbParameter();
+                    command.Parameters.Add("LName", SqlDbType.NVarChar, 50).Value = userInfo.LName.ToDbParameter();
+                    command.Parameters.Add("Province", SqlDbType.NVarChar, 90).Value = userInfo.Province.ToDbParameter();
+                    command.Parameters.Add("City", SqlDbType.NVarChar, 50).Value = userInfo.City.ToDbParameter();
+
+                    int result = command.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        message = "UPDATED";
+                    }
+                    else
+                    {
+                        message = "ERROR";
+                    }
+
+                    connection.Close();                    
+                }               
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+
+            return message;
+        }
+
+        //UPDATE USER PASSWORD
+        public string UpdateUserPassword(UserDetails userInfo)
+        {
+            string message;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connString))
+                using (SqlCommand command = new SqlCommand("Main.UpdateUserPasswordByUserID", connection))
+                {
+                    connection.Open();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("UserId", SqlDbType.Int).Value = userInfo.UserID.ToDbParameter();
+                    command.Parameters.Add("UserPW", SqlDbType.NVarChar, 15).Value = userInfo.UserPW.ToDbParameter();
+
+                    int result = command.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        message = "UPDATED";
+                    }
+                    else
+                    {
+                        message = "ERROR";
+                    }
+
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+
+            return message;
+        }
+
     }
     public static class DBUtils   // database fetch usable methods (for nullable rows)
     {
