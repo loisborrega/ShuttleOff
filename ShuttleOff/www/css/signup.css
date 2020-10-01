@@ -613,7 +613,7 @@ form {
         }
 
         form .message.success {
-            color: #1b5e20;
+            color: #006666;
         }
 
             form .message.success:before {
@@ -771,7 +771,7 @@ textarea {
         animation: focus 0.1s;
         color: white;
         background-color: rgba(255, 255, 255, 0.125);
-        border-color: #1b5e20;
+        border-color: #006666;
     }
 
 select {
@@ -869,7 +869,7 @@ input[type="radio"] {
     input[type="radio"]:checked + label:before {
         font-family: FontAwesome;
         background: #1b5e20;
-        border-color: #1b5e20;
+        border-color: #006666;
         color: #ffffff;
         content: "\f00c";
         vertical-align: middle;
@@ -877,7 +877,7 @@ input[type="radio"] {
 
     input[type="checkbox"]:focus + label:before,
     input[type="radio"]:focus + label:before {
-        border-color: #1b5e20;
+        border-color: #006666;
         box-shadow: 0 0 0 2px #1b5e20;
     }
 
@@ -928,7 +928,7 @@ button,
     -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
     -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-    background-color: #003300;
+    background-color: #006666;
     border-radius: 6px;
     border: 0;
     color: #ffffff !important;
@@ -950,7 +950,7 @@ button,
     input[type="button"]:hover,
     button:hover,
     .button:hover {
-        background-color: #1b5e20;
+        background-color: #007a7a;
     }
 
     button[type="submit"]:active,
@@ -958,7 +958,7 @@ button,
     input[type="button"]:active,
     button:active,
     .button:active {
-        background-color: #60ad5e;
+        background-color: #007a7a;
     }
 
     button[type="submit"].disabled, button[type="submit"]:disabled,
@@ -1051,7 +1051,7 @@ button,
 .container {
     position: relative;
     border-radius: 10px;
-    background-color: rgba(76,140,74,0.6);
+    background-color: rgba(70,227,227,0.6);
     height: 100%;
 }
 

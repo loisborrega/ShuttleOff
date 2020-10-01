@@ -29,6 +29,7 @@ function closeNav() {
 function closeEditProfile() {
     var x = document.getElementById("edit-profile");
     x.style.width = "0";
+    ResetFieldsClicked();
 }
 
 function openEditProfile() {
@@ -106,7 +107,7 @@ function setCities() {
     var information = document.getElementsByName("information");
     var provinceSel = information[3].value;
     if (provinceSel == 0) {
-        information[4].innerHTML = "<option>None</option>"
+        information[4].innerHTML = "<option>None</option>";
     }
     else {
         var citiesOptions = "";
@@ -117,11 +118,21 @@ function setCities() {
     }
 }
 
+//RESET INPUT FIELDS
+function ResetFieldsClicked() {
+    document.getElementById("first_name").value = '';
+    document.getElementById("mid_name").value = '';
+    document.getElementById("last_name").value = '';
+    document.getElementById("city").innerHTML = "<option>None</option>";
+    setProvinces();  
+}
+
+
 //UPDATE USER DETAILS
 function UpdateUserDetailsClicked() {
     var userInfoJSON = {
         "userInfo": {
-            UserID: localStorage["UserId"],
+            UserID: window.localStorage.getItem("UserId"),
             FName: $("#first_name").val(),
             MName: $("#mid_name").val(),
             LName: $("#last_name").val(),
@@ -188,7 +199,7 @@ function ValidateCurrentPW() {
 function UpdateUserPasswordClicked() {
     var userInfoJSON = {
         "userInfo": {
-            UserID: localStorage["UserId"],
+            UserID: window.localStorage.getItem("UserId"),
             UserPW: $("#new_pw").val()
         }
     };

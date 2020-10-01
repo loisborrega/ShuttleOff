@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
 
-    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
@@ -25,6 +25,7 @@
                 <a href="dashboard.html"><i class="fas fa-search-location"> </i> <span>Play</span></a>
                 <a onclick="closeNav()"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
                 <a href="reservation.html"><i class="far fa-calendar-alt"></i><span>Reservations</span></a>
+                <a href="court.html"><i class="fas fa-map-marked-alt"></i><span>Courts</span></a>
                 <a href="index.html"><i class="fas fa-power-off"></i> <span>Log Out</span></a>
             </div>
         </div>
@@ -56,10 +57,7 @@
                         <div class="profile-content">
                             <h3>Email</h3>
                             <input type="text" id="email" placeholder="Email Address" readonly>
-                        </div>
-                        <div class="profile-content">
-                            <h5>Become a Court Owner</h5>
-                        </div>
+                        </div>                        
                         <div class="profile-content">
                             <h5 onclick="openEditProfile()">Edit Profile</h5>
                         </div>
@@ -106,7 +104,7 @@
                                         <option value="">None</option>
                                     </select>
                                 </div>
-                                <h5 id="reset_fields">Reset Fields</h5>
+                                <h5 onclick="ResetFieldsClicked()" id="reset_fields">Reset Fields</h5>
                                 <h5 onclick="UpdateUserDetailsClicked()" id="sav_chngs">Save Changes</h5>
                                 <h5 onclick="openChangePassPanel()" id="chng_pass">Change Password</h5>
                                 <h5 id="del_acc">Delete Account</h5>
@@ -147,11 +145,11 @@
 
     <!--Scripts-->
     <script type="text/javascript" src="scripts/jquery.js"></script>
-    <!--<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
-    <!--<script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="scripts/platformOverrides.js"></script>-->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
 
     <script src="https://kit.fontawesome.com/fec759ef55.js" crossorigin="anonymous"></script>

@@ -19,31 +19,29 @@ function LoginClicked() {
         dataType: 'json',
         processdata: true,
         success: function (data) {
-            var userDetails = JSON.parse(data.UserLoginResult);
-            
-            localStorage.setItem("UserId", userDetails.UserID);
-            localStorage.setItem("EmailAddress", userDetails.EmailAdd);
-            localStorage.setItem("UserPassword", userDetails.UserPW);
-            localStorage.setItem("FirstName", userDetails.FName);
-            localStorage.setItem("MiddleName", userDetails.MName);
-            localStorage.setItem("LastName", userDetails.LName);
-            localStorage.setItem("UserProvince", userDetails.Province);
-            localStorage.setItem("UserCity", userDetails.City);
-            localStorage.setItem("UserCreated", userDetails.DateCreated);
-
-            window.close = "index.html";
-            window.location = "dashboard.html";
-            /*var value = data;
-            if (value.UserLoginResult == "Verified")
+            var value = JSON.parse(data.UserLoginResult);
+            if (value.FName)
             {
-                window.close = 'index.html';
-                window.location = "dashboard.html";
+                var userDetails = JSON.parse(data.UserLoginResult);
+
+                localStorage.setItem("UserId", userDetails.UserID);
+                localStorage.setItem("EmailAddress", userDetails.EmailAdd);
+                localStorage.setItem("UserPassword", userDetails.UserPW);
+                localStorage.setItem("FirstName", userDetails.FName);
+                localStorage.setItem("MiddleName", userDetails.MName);
+                localStorage.setItem("LastName", userDetails.LName);
+                localStorage.setItem("UserProvince", userDetails.Province);
+                localStorage.setItem("UserCity", userDetails.City);
+                localStorage.setItem("UserCreated", userDetails.DateCreated);
+
+                window.close = "index.html";
+                window.location = "dashboard.html";                
             }
-            else if (value.UserLoginResult == "Unverified")
+            else
             {
                 alert("Incorrect email address or password.");
                 window.location = "index.html";
-            }*/
+            }
         },
         error: function (result) {
             alert(result.responseText);

@@ -1,0 +1,700 @@
+﻿:root {
+    --primary-color: #006666;
+    --secondary-color: #f0f7f7;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.content {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #cff1f1;
+}
+
+.app-header {
+    background-color: #006666;
+    width: 100%;
+    height: 8%;
+    box-shadow: 3px 3px 10px #888;
+    z-index: 10;
+}
+
+    .app-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 0.5rem 0 0.5rem;
+        overflow: none;
+    }
+
+    .app-header .logo {
+        width: 2.8rem;
+    }
+
+    .app-header .container i {
+        color: whitesmoke;
+        cursor: pointer;
+    }
+
+/*Side nav*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    float: left;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+    .sidenav a {
+        padding: 0.4rem;
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: whitesmoke;
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 0.5rem;
+        width: 90%;
+        /* transition: 0.3s; */
+    }
+
+    .sidenav i {
+        padding-right: 2rem;
+    }
+
+    .sidenav a span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .sidenav a span::after {
+            font-size: 25px;
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .sidenav a:hover span {
+        padding-right: 25px;
+    }
+
+        .sidenav a:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+    .sidenav .closebtn {
+        justify-content: flex-end;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        transition: 0.5s;
+    }
+
+        .sidenav .closebtn:hover {
+            opacity: 0.6;
+        }
+
+.btn-container {
+    position: absolute;
+    width: 100%;
+    height: 5%;
+    top: 8%;
+    transition: 0.1s ease-out;
+}
+
+.btn-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.rad {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    opacity: 0;
+}
+
+.add-new {
+    left: 50%;
+    background-color: var(--secondary-color);
+}
+
+.desc {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.btn-wrapper > span {
+    position: absolute;
+    width: 50%;
+    background-color: #03b3b3;
+    height: 5px;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s ease-out;
+    transform: translate(0,0);
+}
+
+.btn-wrapper > .my-court[type = 'radio']:checked ~ span {
+    transform: translate(0,0)
+}
+
+.btn-wrapper > .add-new[type = 'radio']:checked ~ span {
+    transform: translate(100%,0)
+}
+
+/* panes */
+.pane-container {
+    position: absolute;
+    top: 13%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 87%;
+}
+
+.pane-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.pane {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s ease-out;
+    background-color: #cff1f1;
+}
+
+#court-reg {
+    left: 100%;
+}
+
+.pane-inner-wrp {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.crt-lst-cnt {
+    width: 80%;
+    background-color: var(--secondary-color);
+    min-height: 11.875%;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    border: none;
+    outline: none;
+}
+
+.crt-lst-cnt-wrp {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.crt-lst-num {
+    background-color: var(--primary-color);
+    color: white;
+    width: 15%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.crt-det {
+    position: absolute;
+    height: 100%;
+    width: 85%;
+    left: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 0.3rem;
+}
+
+    .crt-det > h3 {
+        color: var(--primary-color);
+    }
+
+    .crt-det h4 > span {
+        color: red;
+    }
+
+.slide-menu {
+    position: absolute;
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 20%;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+}
+
+.trash-btn {
+    right: -20%;
+}
+
+.edit-btn {
+    right: -20%;
+}
+
+.crt-lst-cnt:focus > .crt-lst-cnt-wrp > .edit-btn {
+    right: 20%;
+}
+
+.crt-lst-cnt:focus > .crt-lst-cnt-wrp > .trash-btn {
+    right: 0;
+}
+
+/*Schedules*/
+
+/* Court edit */
+.crt-edit {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    transition: 0.3s ease-in;
+}
+
+.crt-edit-wrp {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.crt-edit-header {
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    background-color: transparent;
+    transition: 0.1s ease-out;
+}
+
+.crt-edit-header-wrp {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+    .crt-edit-header-wrp > span {
+        display: flex;
+        height: 100%;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--primary-color);
+    }
+
+        .crt-edit-header-wrp > span > i {
+            font-size: 1.3rem;
+            color: whitesmoke;
+            transition: 0.3s ease-out;
+        }
+
+.radio-btn {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.user-cap {
+    left: 50%;
+}
+
+.address[type = 'radio']:checked + span > i {
+    color: #9bbdbd;
+}
+
+.user-cap[type = 'radio']:checked + span > i {
+    color: #9bbdbd;
+}
+
+.crt-edit-panes {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    height: 75%;
+    width: 100%;
+}
+
+.crt-edit-p-wrp {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.crt-edit-p {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s ease-out;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.crt-edit-p2 {
+    left: 100%;
+}
+
+.add-circle-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+    .add-circle-container > i {
+        font-size: 36px;
+        color: var(--primary-color);
+        cursor: pointer;
+    }
+
+.sched-pane {
+    align-items: center;
+    background-color: #cff1f1;
+}
+
+.crt-sched {
+    width: 80%;
+    min-height: 15%;
+    display: flex;
+    background-color: var(--secondary-color);
+    overflow: hidden;
+    outline: none;
+    margin-top: 0.5rem;
+}
+
+.crt-sched-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.crt-sched-num {
+    background-color: var(--primary-color);
+    color: white;
+    width: 15%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.crt-sched-det {
+    display: flex;
+    width: 85%;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding-left: 0.5rem;
+}
+
+.crt-sched-opt {
+    position: absolute;
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 20%;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+}
+
+.crt-sched-edit {
+    right: -20%;
+}
+
+.crt-sched-del {
+    right: -20%;
+}
+
+.crt-sched:focus > .crt-sched-wrap > .crt-sched-edit {
+    right: 20%;
+}
+
+.crt-sched:focus > .crt-sched-wrap > .crt-sched-del {
+    right: 0;
+}
+
+.crt-edit-p3 {
+    left: 200%;
+}
+
+.crt-edit-cntnt-wrp {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.crt-edit-p3-header {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: whitesmoke;
+}
+
+.availability-details {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    font-size: 0.8rem;
+}
+
+.av-cap {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-right: 3px solid var(--primary-color);
+    color: var(--primary-color);
+    padding-bottom: 0.3rem;
+}
+
+    .av-cap > select {
+        border: none;
+        outline: none;
+        color: black;
+        background-color: transparent;
+    }
+
+.av-court-num {
+    width: 50%;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    padding-bottom: 0.3rem;
+}
+
+    .av-court-num > input {
+        width: 20%;
+        border: none;
+        background-color: var(--secondary-color);
+        border-bottom: 1px solid var(--primary-color);
+        outline: none;
+        color: black;
+        text-align: center;
+    }
+
+.av-time {
+    justify-content: space-evenly;
+}
+
+.a-info-time-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-color);
+}
+
+    .a-info-time-container > select {
+        outline: none;
+        border: none;
+        border-bottom: 1px solid var(--primary-color);
+        background-color: transparent;
+    }
+
+.av-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-top: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+    .av-day > h3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 50%;
+    }
+
+.day-container {
+    display: flex;
+    position: relative;
+    height: 50%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.day {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .day > h4 {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        transition: 0.2s ease-out;
+        color: var(--primary-color);
+    }
+
+    .day > input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+    .day > [type = "checkbox"]:checked + h4 {
+        background-color: #88d3ac;
+    }
+
+.av-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 15%;
+    bottom: 0;
+    position: absolute;
+    background-color: #cff1f1;
+    transition: 0.1s ease-out;
+}
+
+.av-btn-wrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+    .av-btn-wrap > button {
+        width: 40%;
+        height: 100%;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        background-color: var(--primary-color);
+        color: whitesmoke;
+        border-radius: 10px;
+    }
+
+.change-btn-bar {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 15%;
+    transition: 0.1s ease-out;
+}
+
+.chg-btn-bar-wrp {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .chg-btn-bar-wrp > button {
+        width: 50%;
+        height: 100%;
+        font-size: 1rem;
+    }
