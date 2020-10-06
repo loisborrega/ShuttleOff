@@ -27,12 +27,13 @@
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
   </platform>
-  <platform name="android">
-    <icon src="res/icons/android/icon-36-ldpi.png" density="ldpi" />
-    <icon src="res/icons/android/icon-48-mdpi.png" density="mdpi" />
-    <icon src="res/icons/android/icon-72-hdpi.png" density="hdpi" />
-    <icon src="res/icons/android/icon-96-xhdpi.png" density="xhdpi" />
-  </platform>
+<platform name="android">    
+    <icon src="assets/mdpi.png" density="mdpi" />
+    <icon src="assets/ldpi.png" density="ldpi" />
+    <icon src="assets/hdpi.png" density="hdpi" />
+    <icon src="assets/xdpi.png" density="xhdpi" />
+    <icon src="assets/xxdpi.png" density="xxhdpi" />
+</platform>
   <platform name="ios">
     <!-- iOS 8.0+ -->
     <!-- iPhone 6 Plus  -->

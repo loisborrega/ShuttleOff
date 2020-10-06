@@ -7,6 +7,8 @@ Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "ShuttleOff", "ShuttleOff\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShuttleOffService", "ShuttleOffService\ShuttleOffService.csproj", "{D8574CC2-DD03-455C-B40F-A575902F5451}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShuttleOffServiceAjax", "ShuttleOffServiceAjax\ShuttleOffServiceAjax.csproj", "{012CF72C-506A-452F-9F97-D0F3BD8183D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Android = Debug|Android
@@ -79,6 +81,30 @@ Global
 		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-x64.Build.0 = Release|Any CPU
 		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-x86.ActiveCfg = Release|Any CPU
 		{D8574CC2-DD03-455C-B40F-A575902F5451}.Release|Windows-x86.Build.0 = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Android.ActiveCfg = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Android.Build.0 = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|iOS.ActiveCfg = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|iOS.Build.0 = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Windows-ARM.ActiveCfg = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Windows-ARM.Build.0 = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Windows-x64.ActiveCfg = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Windows-x64.Build.0 = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Debug|Windows-x86.Build.0 = Debug|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Android.ActiveCfg = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Android.Build.0 = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|iOS.ActiveCfg = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|iOS.Build.0 = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Windows-ARM.ActiveCfg = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Windows-ARM.Build.0 = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Windows-x64.ActiveCfg = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Windows-x64.Build.0 = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Windows-x86.ActiveCfg = Release|Any CPU
+		{012CF72C-506A-452F-9F97-D0F3BD8183D7}.Release|Windows-x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

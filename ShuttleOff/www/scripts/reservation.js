@@ -1,4 +1,9 @@
-﻿//Functions onload
+﻿
+
+var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+
+
+//Functions onload
 
 setActiveReservations();
 setHistoryReservations();

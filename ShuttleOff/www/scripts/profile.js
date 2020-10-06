@@ -1,4 +1,7 @@
-﻿//Display profile on load
+﻿
+var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+
+//Display profile on load
 var FirstNameH5 = localStorage.getItem("FirstName");
 var UserLocation = localStorage.getItem("UserCity") + ", " + localStorage.getItem("UserProvince");
 var FullName = localStorage.getItem("FirstName") + " " + localStorage.getItem("MiddleName") + " " + localStorage.getItem("LastName");
@@ -143,7 +146,7 @@ function UpdateUserDetailsClicked() {
 
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:54458/Service1.svc/UpdateUserDetails',
+        url: urlData + '/UpdateUserDetails',
         data: JSON.stringify(userInfoJSON),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -206,7 +209,7 @@ function UpdateUserPasswordClicked() {
 
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:54458/Service1.svc/UpdateUserPassword',
+        url: urlData + 'UpdateUserPassword',
         data: JSON.stringify(userInfoJSON),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
