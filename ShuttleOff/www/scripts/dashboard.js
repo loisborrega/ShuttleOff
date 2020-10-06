@@ -1,5 +1,6 @@
 ﻿/*Global Variables */
 var slideIndex = 0;
+var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
 
 /*Functions to Initialize*/
 showSlides();

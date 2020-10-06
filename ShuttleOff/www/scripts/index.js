@@ -3,6 +3,10 @@
 // To debug code on page load in cordova-simulate or on Android devices/emulators: launch your app, set breakpoints, 
 // and then run "window.location.reload()" in the JavaScript Console.
 
+
+var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+//var urlData = "Dito ka maglagay";
+
 function LoginClicked() {
     var userInfoJSON = {
         "userLog": {
@@ -13,26 +17,27 @@ function LoginClicked() {
 
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:54458/Service1.svc/UserLogin',
+        url: urlData + '/UserLogin',
         data: JSON.stringify(userInfoJSON),        
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         processdata: true,
         success: function (data) {
-            var value = JSON.parse(data.UserLoginResult);
-            if (value.FName)
-            {
-                var userDetails = JSON.parse(data.UserLoginResult);
 
-                localStorage.setItem("UserId", userDetails.UserID);
-                localStorage.setItem("EmailAddress", userDetails.EmailAdd);
-                localStorage.setItem("UserPassword", userDetails.UserPW);
-                localStorage.setItem("FirstName", userDetails.FName);
-                localStorage.setItem("MiddleName", userDetails.MName);
-                localStorage.setItem("LastName", userDetails.LName);
-                localStorage.setItem("UserProvince", userDetails.Province);
-                localStorage.setItem("UserCity", userDetails.City);
-                localStorage.setItem("UserCreated", userDetails.DateCreated);
+            console.log(data.d.FName);
+            if (data.d.UserID != 0)
+            {
+
+                localStorage.setItem("UserId", data.d.UserID);
+                localStorage.setItem("EmailAddress", data.d.EmailAdd);
+                localStorage.setItem("UserPassword", data.d.UserPW);
+                localStorage.setItem("FirstName", data.d.FName);
+                localStorage.setItem("MiddleName", data.d.MName);
+                localStorage.setItem("LastName", data.d.LName);
+                localStorage.setItem("UserProvince", data.d.Province);
+                localStorage.setItem("UserCity", data.d.City);
+                localStorage.setItem("UserCreated", data.d.DateCreated);
+                
 
                 window.close = "index.html";
                 window.location = "dashboard.html";                
@@ -40,11 +45,13 @@ function LoginClicked() {
             else
             {
                 alert("Incorrect email address or password.");
-                window.location = "index.html";
+               
+                
             }
         },
         error: function (result) {
-            alert(result.responseText);
+            console.log(result);
+            console.log(123123);
         }
     });
 }
@@ -146,6 +153,9 @@ function LoginClicked() {
 
     })();
 
+
+
+
     // Login Form.
     (function () {
 
@@ -212,5 +222,7 @@ function LoginClicked() {
 
         });
 
-    })();
+    })
+
+        ();
 } )();

@@ -3,6 +3,10 @@
 // To debug code on page load in cordova-simulate or on Android devices/emulators: launch your app, set breakpoints, 
 // and then run "window.location.reload()" in the JavaScript Console.
 
+
+var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+
+
 //SET CITIES BASED ON PROVINCE - DROPDOWN
 var CitiesByProvince = {
     Bulacan: ["Malolos", "Meycauayan"],
@@ -57,7 +61,7 @@ function SubmitClicked() {
 
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:54458/Service1.svc/AddUserDetails',
+        url: urlData + '/AddUserDetails',
         data: JSON.stringify(userInfoJSON),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
