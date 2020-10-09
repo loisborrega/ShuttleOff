@@ -32,6 +32,29 @@ namespace ShuttleOffService
         [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         string UpdateUserPassword(UserDetails userInfo);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddCourtDetails")]
+        string AddCourtDetails(CourtDetails courtInfo, string userID);
+
+        [OperationContract]
+        [WebInvoke(Method = "OPTIONS", UriTemplate = "/AddCourtDetails")]
+        void AddCourtDetailsOptions();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "/GetCourtID")]
+        string GetCourtID(CourtDetails courtInfo, string userID);
+
+        [OperationContract]
+        [WebInvoke(Method = "OPTIONS", UriTemplate = "/GetCourtID")]
+        void GetCourtIDOptions();
+
+        [OperationContract]
+        [WebInvoke(Method = "*", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddCourtSchedUponCourtReg")]
+        string AddCourtSchedUponCourtReg(int CourtID, string StartTime, string EndTime, string SchedDate);
+
+        [OperationContract]
+        [WebInvoke(Method = "OPTIONS", UriTemplate = "/AddCourtSchedUponCourtReg")]
+        void AddCourtSchedUponCourtRegOptions();
     }
 
     [DataContract]
@@ -60,6 +83,31 @@ namespace ShuttleOffService
         [DataMember]
         public DateTime DateCreated { get { return datecreated; } set { datecreated = value; } }
 
+    }
+
+    [DataContract]
+    public class CourtDetails
+    {
+        private string cname, cdesc, ccapacity, caddress, cprovince, ccity;
+        private int courtid;
+        private DateTime dateregistered;
+
+        [DataMember]
+        public int CourtID { get { return courtid; } set { courtid = value; } }
+        [DataMember]
+        public string CName { get { return cname; } set { cname = value; } }
+        [DataMember]
+        public string CDesc { get { return cdesc; } set { cdesc = value; } }
+        [DataMember]
+        public string CCapacity { get { return ccapacity; } set { ccapacity = value; } }
+        [DataMember]
+        public string CAddress { get { return caddress; } set { caddress = value; } }
+        [DataMember]
+        public string CProvince { get { return cprovince; } set { cprovince = value; } }
+        [DataMember]
+        public string CCity { get { return ccity; } set { ccity = value; } }
+        [DataMember]
+        public DateTime DateRegistered { get { return dateregistered; } set { dateregistered = value; } }
     }
 
 }

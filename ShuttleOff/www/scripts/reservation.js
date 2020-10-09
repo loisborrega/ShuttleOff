@@ -1,46 +1,45 @@
-﻿
-
-var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-
+﻿//var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+var urlData = 'http://localhost:54458/Service1.svc';
+//var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
 
 //Functions onload
 
 setActiveReservations();
 setHistoryReservations();
 
-function openNav(){
+function openNav() {
     var x = document.getElementById("mySidenav");
     x.style.width = "260px";
 }
 
-function closeNav(){
+function closeNav() {
     var x = document.getElementById("mySidenav");
     x.style.width = "0";
 }
 
-function showActivePane(){
+function showActivePane() {
     var p1 = document.getElementById("pane1");
     var p2 = document.getElementById("pane2");
     var indicator = document.getElementById("btn-selection-indicator");
 
     p1.style.transform = "translate(0,0)";
     p2.style.transform = "translate(100%,0)";
-    indicator.style.transform = "translate(0,0)" 
-    
+    indicator.style.transform = "translate(0,0)"
+
 }
 
-function showHistoryPane(){
+function showHistoryPane() {
     var p1 = document.getElementById("pane1");
     var p2 = document.getElementById("pane2");
     var indicator = document.getElementById("btn-selection-indicator");
 
     p1.style.transform = "translate(-100%,0)";
     p2.style.transform = "translate(0,0)";
-    indicator.style.transform = "translate(100%,0)" 
+    indicator.style.transform = "translate(100%,0)"
 }
 
-function loadActiveReservations(){
-    
+function loadActiveReservations() {
+
     //Sample query size of all active reservations
     let queryLength = 1;
 
@@ -48,13 +47,13 @@ function loadActiveReservations(){
     var reservations = [];
 
     //Loading reservationData object to reservation array
-    for (let i = 0; i< queryLength; i++ ){
+    for (let i = 0; i < queryLength; i++) {
 
         //load reservation data format here, dictionary sample per object
         var reservationData = {
-            resId : 0,
-            userId : 0,
-            courtName : "",
+            resId: 0,
+            userId: 0,
+            courtName: "",
             time: "",
             address: ""
         }
@@ -69,26 +68,26 @@ function loadActiveReservations(){
     return reservations;
 }
 
-function setActiveReservations(){
+function setActiveReservations() {
     var parent = document.querySelector(".pane1-wrap");
     var reservations = loadActiveReservations();
 
-    if (reservations.length != 0){
+    if (reservations.length != 0) {
         parent.innerHTML = "";
-        for(let i = 0; i < reservations.length; i++){
+        for (let i = 0; i < reservations.length; i++) {
             parent.innerHTML += "<div tabindex = " + i + " class=\"pane1-content\"><div class=\"pane1-content-wrap\"><i class=\"fas fa-map-marker-alt\">&nbsp;"
-            + reservations[i].courtName +"</i><i class=\"far fa-clock\">&nbsp;" 
-            + reservations[i].time+ "</i><span><i class=\"far fa-trash-alt\"></i></span></div></div><div class=\"court-address\"><h4>Address</h4><p>"
-            + reservations[i].address+"</p></div>";
+                + reservations[i].courtName + "</i><i class=\"far fa-clock\">&nbsp;"
+                + reservations[i].time + "</i><span><i class=\"far fa-trash-alt\"></i></span></div></div><div class=\"court-address\"><h4>Address</h4><p>"
+                + reservations[i].address + "</p></div>";
         }
     }
 }
 
-function deleteActiveReservations(){
+function deleteActiveReservations() {
     //delete and reload
 }
 
-function loadHistory(){
+function loadHistory() {
     //Sample query size of all active reservations
     let queryLength = 4;
 
@@ -96,13 +95,13 @@ function loadHistory(){
     var reservations = [];
 
     //Loading reservationData object to reservation array
-    for (let i = 0; i< queryLength; i++ ){
+    for (let i = 0; i < queryLength; i++) {
 
         //load history reservation data format here, dictionary sample per object
         var reservationData = {
-            resId : 0,
-            userId : 0,
-            courtName : "",
+            resId: 0,
+            userId: 0,
+            courtName: "",
             time: "",
             address: ""
         }
@@ -117,17 +116,17 @@ function loadHistory(){
     return reservations;
 }
 
-function setHistoryReservations(){
+function setHistoryReservations() {
     var parent = document.querySelector(".pane2-wrap");
     var reservations = loadHistory();
 
-    if (reservations.length != 0){
+    if (reservations.length != 0) {
         parent.innerHTML = "";
-        for(let i = 0; i < reservations.length; i++){
+        for (let i = 0; i < reservations.length; i++) {
             parent.innerHTML += "<div tabindex = " + i + " class=\"pane2-content\"><div class=\"pane2-content-wrap\"><i class=\"fas fa-map-marker-alt\">&nbsp;"
-            + reservations[i].courtName +"</i><i class=\"far fa-clock\">&nbsp;" 
-            + reservations[i].time+ "</i></div></div><div class=\"court-address\"><h4>Address</h4><p>"
-            + reservations[i].address+"</p></div>";
+                + reservations[i].courtName + "</i><i class=\"far fa-clock\">&nbsp;"
+                + reservations[i].time + "</i></div></div><div class=\"court-address\"><h4>Address</h4><p>"
+                + reservations[i].address + "</p></div>";
         }
     }
 }

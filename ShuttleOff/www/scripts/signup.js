@@ -4,8 +4,9 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 
 
-var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-
+//var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+var urlData = 'http://localhost:54458/Service1.svc';
+//var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
 
 //SET CITIES BASED ON PROVINCE - DROPDOWN
 var CitiesByProvince = {

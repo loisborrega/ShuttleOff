@@ -4,8 +4,9 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 
 
-var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-//var urlData = "Dito ka maglagay";
+//var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+var urlData = 'http://localhost:54458/Service1.svc';
+//var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
 
 function LoginClicked() {
     var userInfoJSON = {
@@ -24,19 +25,20 @@ function LoginClicked() {
         processdata: true,
         success: function (data) {
 
-            console.log(data.d.FName);
-            if (data.d.UserID != 0)
+            //console.log(data.d.FName);
+            //if (data.d.UserID != 0)
+            var value = JSON.parse(data.UserLoginResult);
+            if(value.FName)
             {
-
-                localStorage.setItem("UserId", data.d.UserID);
-                localStorage.setItem("EmailAddress", data.d.EmailAdd);
-                localStorage.setItem("UserPassword", data.d.UserPW);
-                localStorage.setItem("FirstName", data.d.FName);
-                localStorage.setItem("MiddleName", data.d.MName);
-                localStorage.setItem("LastName", data.d.LName);
-                localStorage.setItem("UserProvince", data.d.Province);
-                localStorage.setItem("UserCity", data.d.City);
-                localStorage.setItem("UserCreated", data.d.DateCreated);
+                localStorage.setItem("UserId", value.UserID);
+                localStorage.setItem("EmailAddress", value.EmailAdd);
+                localStorage.setItem("UserPassword", value.UserPW);
+                localStorage.setItem("FirstName", value.FName);
+                localStorage.setItem("MiddleName", value.MName);
+                localStorage.setItem("LastName", value.LName);
+                localStorage.setItem("UserProvince", value.Province);
+                localStorage.setItem("UserCity", value.City);
+                localStorage.setItem("UserCreated", value.DateCreated);
                 
 
                 window.close = "index.html";
@@ -45,13 +47,12 @@ function LoginClicked() {
             else
             {
                 alert("Incorrect email address or password.");
-               
-                
             }
         },
         error: function (result) {
-            console.log(result);
-            console.log(123123);
+            alert(result);
+            /*console.log(result);
+            console.log(123123);*/
         }
     });
 }

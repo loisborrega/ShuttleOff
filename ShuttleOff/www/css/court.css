@@ -29,7 +29,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #cff1f1;
+    background-color: var(--secondary-color);
 }
 
 .app-header {
@@ -239,7 +239,12 @@ body {
     margin-top: 0.5rem;
     border: none;
     outline: none;
+    transition: 0.1s ease-out;
 }
+
+    .crt-lst-cnt:focus {
+        transform: translate(2px,2px);
+    }
 
 .crt-lst-cnt-wrp {
     position: relative;
@@ -311,6 +316,10 @@ body {
     right: 0;
 }
 
+.crt-reg {
+    overflow: hidden;
+}
+
 /*Schedules*/
 
 /* Court edit */
@@ -328,6 +337,7 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
+    overflow: hidden;
 }
 
 .crt-edit-header {
@@ -368,7 +378,7 @@ body {
     opacity: 0;
 }
 
-.user-cap {
+.schedules {
     left: 50%;
 }
 
@@ -376,7 +386,7 @@ body {
     color: #9bbdbd;
 }
 
-.user-cap[type = 'radio']:checked + span > i {
+.schedules[type = 'radio']:checked + span > i {
     color: #9bbdbd;
 }
 
@@ -393,7 +403,6 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
-    overflow: hidden;
 }
 
 .crt-edit-p {
@@ -402,12 +411,18 @@ body {
     width: 100%;
     height: 100%;
     transition: 0.3s ease-out;
+}
+
+.crt-edit-p1 {
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
 .crt-edit-p2 {
     left: 100%;
+    background-color: #cff1f1;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .add-circle-container {
@@ -437,6 +452,7 @@ body {
     overflow: hidden;
     outline: none;
     margin-top: 0.5rem;
+    transition: 0.1s ease-out;
 }
 
 .crt-sched-wrap {
@@ -482,24 +498,21 @@ body {
     cursor: pointer;
 }
 
-.crt-sched-edit {
-    right: -20%;
-}
-
 .crt-sched-del {
     right: -20%;
 }
 
-.crt-sched:focus > .crt-sched-wrap > .crt-sched-edit {
-    right: 20%;
+.crt-sched:focus {
+    transform: translate(2px,2px);
 }
 
-.crt-sched:focus > .crt-sched-wrap > .crt-sched-del {
-    right: 0;
-}
+    .crt-sched:focus > .crt-sched-wrap > .crt-sched-del {
+        right: 0;
+    }
 
 .crt-edit-p3 {
     left: 200%;
+    overflow: hidden;
 }
 
 .crt-edit-cntnt-wrp {
@@ -518,6 +531,7 @@ body {
     justify-content: center;
     background-color: var(--primary-color);
     color: whitesmoke;
+    box-shadow: 3px 3px 5px #888;
 }
 
 .availability-details {
@@ -583,64 +597,27 @@ body {
     .a-info-time-container > select {
         outline: none;
         border: none;
-        border-bottom: 1px solid var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
         background-color: transparent;
     }
 
-.av-day {
-    display: flex;
+
+.av-date {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border-top: 3px solid var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
-}
-
-    .av-day > h3 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 50%;
-    }
-
-.day-container {
-    display: flex;
-    position: relative;
-    height: 50%;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.day {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-    .day > h4 {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        transition: 0.2s ease-out;
+    .av-date > h3 {
         color: var(--primary-color);
     }
 
-    .day > input {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-    }
-
-    .day > [type = "checkbox"]:checked + h4 {
-        background-color: #88d3ac;
+    .av-date > input {
+        background-color: transparent;
+        border: none;
+        color: black;
+        outline: none;
+        border-bottom: 3px solid var(--primary-color);
     }
 
 .av-btn-container {
@@ -651,7 +628,7 @@ body {
     height: 15%;
     bottom: 0;
     position: absolute;
-    background-color: #cff1f1;
+    background-color: var(--secondary-color);
     transition: 0.1s ease-out;
 }
 

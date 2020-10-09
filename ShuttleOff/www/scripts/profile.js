@@ -1,5 +1,7 @@
 ﻿
-var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+//var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+var urlData = 'http://localhost:54458/Service1.svc';
+//var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
 
 //Display profile on load
 var FirstNameH5 = localStorage.getItem("FirstName");

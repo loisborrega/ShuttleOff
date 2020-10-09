@@ -18,8 +18,8 @@ namespace ShuttleOffService
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service1 : IService1
     {
-        //private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
-        private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
+        //private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
 
         // VERIFY LOGIN AND GET USER DETAILS        
         public string UserLogin(UserDetails userLog)
@@ -32,12 +32,12 @@ namespace ShuttleOffService
                 {                    
                     connection.Open();
 
-                    SqlCommand cmd = new SqlCommand("Main.VerifyLogin", connection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("EmailAdd", userLog.EmailAdd);
-                    cmd.Parameters.AddWithValue("UserPW", userLog.UserPW);
+                    SqlCommand command = new SqlCommand("Main.VerifyLogin", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("EmailAdd", userLog.EmailAdd);
+                    command.Parameters.AddWithValue("UserPW", userLog.UserPW);
 
-                    SqlDataReader dr = cmd.ExecuteReader();
+                    SqlDataReader dr = command.ExecuteReader();
                     while (dr.Read())
                     {
                         logUser.UserID = int.Parse(dr[0].ToString());
@@ -170,6 +170,121 @@ namespace ShuttleOffService
 
             return message;
         }
+
+        // ADD USER DETAILS
+        public string AddCourtDetails(CourtDetails courtInfo, string userID)
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("CourtOwner.AddCourtDetails", connection))
+            {
+                string message;
+                var date = DateTime.Now;
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("UserId", SqlDbType.Int).Value = userID.ToDbParameter();
+                command.Parameters.Add("Court_Name", SqlDbType.NVarChar, 90).Value = courtInfo.CName.ToDbParameter();
+                command.Parameters.Add("Court_Desc", SqlDbType.NVarChar, 250).Value = courtInfo.CDesc.ToDbParameter();
+                command.Parameters.Add("Court_Capacity", SqlDbType.TinyInt).Value = courtInfo.CCapacity.ToDbParameter();
+                command.Parameters.Add("Court_Address", SqlDbType.NVarChar, 120).Value = courtInfo.CAddress.ToDbParameter();
+                command.Parameters.Add("Court_Province", SqlDbType.NVarChar, 90).Value = courtInfo.CProvince.ToDbParameter();
+                command.Parameters.Add("Court_City", SqlDbType.NVarChar, 50).Value = courtInfo.CCity.ToDbParameter();
+                command.Parameters.AddWithValue("Court_Date", SqlDbType.DateTime).Value = date.ToDbParameter();
+
+                int result = command.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    message = "SUCCESSFUL";
+                }
+                else
+                {
+                    message = "ERROR";
+                }
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void AddCourtDetailsOptions()
+        { }
+
+        // GET COURT ID TO CREATE SCHEDULE UPON COURT REGISTRATION
+        public string GetCourtID(CourtDetails courtInfo, string userID)
+        {
+            CourtDetails GetCourtID = new CourtDetails();
+            string resultVal;
+            try
+            {
+                using (var connection = new SqlConnection(connString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("CourtOwner.GetCourtIdForSchedule", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("UserId", userID);
+                    command.Parameters.AddWithValue("Court_Name", courtInfo.CName);
+                    command.Parameters.AddWithValue("Court_Desc", courtInfo.CDesc);
+                    command.Parameters.AddWithValue("Court_Capacity", courtInfo.CCapacity);
+                    command.Parameters.AddWithValue("Court_Address", courtInfo.CAddress);
+                    command.Parameters.AddWithValue("Court_Province", courtInfo.CProvince);
+                    command.Parameters.AddWithValue("Court_City", courtInfo.CCity);
+
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        GetCourtID.CourtID = int.Parse(dr[0].ToString());                      
+                    }
+
+                    connection.Close();
+                }
+
+                resultVal = JsonConvert.SerializeObject(GetCourtID);
+            }
+            catch (Exception ex)
+            {
+                resultVal = ex.Message;
+            }
+
+            return resultVal;
+        }
+
+        public void GetCourtIDOptions()
+        { }
+
+        // ADD COURT SCHEDULE UPON COURT CREATION
+        public string AddCourtSchedUponCourtReg(int CourtID, string StartTime, string EndTime, string SchedDate)
+        {
+            //int startTime = Convert.ToInt32(StartTime);
+            //int endTime = Convert.ToInt32(EndTime);
+            //DateTime schedDate = Convert.ToDateTime(SchedDate);
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("CourtOwner.AddCourtSchedules", connection))
+            {
+                string message;
+                
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("CourtId", SqlDbType.Int).Value = CourtID.ToDbParameter();
+                command.Parameters.Add("Starttime", SqlDbType.Time, 7).Value = StartTime.ToDbParameter();
+                command.Parameters.Add("Endtime", SqlDbType.Time, 7).Value = EndTime.ToDbParameter();
+                command.Parameters.Add("Date", SqlDbType.Date).Value = SchedDate.ToDbParameter();
+
+                int result = command.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    message = "SUCCESSFUL";
+                }
+                else
+                {
+                    message = "ERROR";
+                }
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void AddCourtSchedUponCourtRegOptions()
+        { }
 
     }
     public static class DBUtils   // database fetch usable methods (for nullable rows)
