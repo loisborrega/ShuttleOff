@@ -5,8 +5,8 @@
 
 
 //var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-var urlData = 'http://localhost:54458/Service1.svc';
-//var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
+//var urlData = 'http://localhost:54458/Service1.svc';
+var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
 
 function LoginClicked() {
     var userInfoJSON = {
@@ -50,11 +50,10 @@ function LoginClicked() {
             }
         },
         error: function (result) {
-            alert(result);
-            /*console.log(result);
-            console.log(123123);*/
+           alert(result);
         }
     });
+
 }
 
 (function () {

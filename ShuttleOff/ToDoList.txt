@@ -1,0 +1,5 @@
+﻿kunin yung name/city/province tapos result ko mga names lang at iistore ko sa child2
+pag pindot yung court gagawa ako stored proc na getDetails tapos iseset ko doon (SIGURO GUMAMIT KA NG LIST)
+
+
+provincename nvarchar(50)

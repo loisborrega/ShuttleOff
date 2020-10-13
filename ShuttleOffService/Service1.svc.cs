@@ -18,8 +18,8 @@ namespace ShuttleOffService
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service1 : IService1
     {
-        private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
-        //private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
+        //private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
 
         // VERIFY LOGIN AND GET USER DETAILS        
         public string UserLogin(UserDetails userLog)
@@ -29,7 +29,7 @@ namespace ShuttleOffService
             try
             {                
                 using (var connection = new SqlConnection(connString))
-                {                    
+                {                   
                     connection.Open();
 
                     SqlCommand command = new SqlCommand("Main.VerifyLogin", connection);

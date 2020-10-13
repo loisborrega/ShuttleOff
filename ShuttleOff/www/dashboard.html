@@ -263,19 +263,18 @@
                                 </div>
                                 <div class="details">
                                     <h2>Schedules</h2>
-                                    <select name="" id="">
-                                        <option value="">1AM-2PM</option>
-                                        <option value="">2AM-4PM</option>
-                                        <option value="">6AM-6PM</option>
+                                    <select name="" id="place_schedule">
+
                                     </select>
+
                                 </div>
                                 <div class="details">
                                     <h2>Address</h2>
-                                    <p>Some long street name, another long street name, the actual street, my house</p>
+                                    <p  name="place_details" id="place_address" />
                                 </div>
                                 <div class="details">
                                     <h2>Description</h2>
-                                    <p>This is an awesome court. I just want to make this long enought to test the overflow of this item. Is this long enough? I think so. Ok, I'm going to stop now.</p>
+                                    <p name="place_details" id="description" />
                                 </div>
                             </div>
                         </div>
@@ -284,7 +283,7 @@
                 </div>
                 <div class="mod-button">
                     <div class="mod-btn-container">
-                        <div class="btn_create_res">
+                        <div onclick="ReserveRegister()" class="btn_create_res" id="btn_create_res">
                             <i class="fas fa-check"></i>
                         </div>
                         <div onclick="closeDetModal()" class="btn_cancel_res">

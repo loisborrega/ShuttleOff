@@ -1,9 +1,14 @@
-﻿//var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-var urlData = 'http://localhost:54458/Service1.svc';
-//var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
+﻿
+
+//var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
+//var urlData = 'http://localhost:54458/Service1.svc'; // Lois
+//var urlData = 'http://localhost/ShuttleOffService/Service1.svc'; // IIS HOST
+var urlData = 'http://localhost:50869/Service1.svc' // Almer Service
 
 /*Global Variables */
 var slideIndex = 0;
+
+
 
 /*Functions to Initialize*/
 showSlides();
@@ -94,51 +99,228 @@ function checkFocusedPlace() {
     //check element focus
     if (document.activeElement.className == "place") {
         var details = document.getElementsByName("place_details");
+        var str = document.activeElement.children[2].textContent
+        var loc = str.split(",");
+        var index = document.activeElement.tabIndex;
+        var c = localStorage.getItem("Court" + index);
+
         //Load Details Pop Up
         details[0].value = document.activeElement.children[1].textContent;
+        
+        details[2].value = loc[1]; // CITY
+        details[3].value = loc[0]; //PROVINCE
+
+        $.ajax({
+            type: 'post',
+            url: urlData + '/DisplayCourtDetails',
+            data: JSON.stringify({ court_id: c }),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            processdata: true,
+            success: function (data) {
+
+                details[1].value = data.d[0].Owner;
+                details[4].value = data.d[0].Capacity;
+                details[5].innerHTML = data.d[0].Address;
+                details[6].innerHTML = data.d[0].Description;
+
+                console.log(data.d[0].StartTime );
+
+                var btn_check = document.getElementById('btn_create_res');
+                btn_check.style.visibility = "visible";
+
+                
+                var sel = document.getElementById('place_schedule');
+                sel.innerHTML = "";
+
+                if (data.d[0].StartTime)
+                {
+                    
+                    var isScheduleExist = 0;
+                    var j = -1; //index
+
+                    for (let i = 0; i < data.d.length; i++) {
+
+                        if (data.d[i].Status === "Available") {
+
+                            var sched_time = document.createElement("option");
+                            sched_time.setAttribute("value", "");
+
+                            var sched_time_child = document.createTextNode(data.d[i].StartTime + ' - ' + data.d[i].EndTime
+                                + ' (' + data.d[i].DateEffective + ')');
+                            sched_time.appendChild(sched_time_child);
+                            sel.appendChild(sched_time);
+
+                            j++;
+                            localStorage.setItem("skidID" + j, data.d[i].SchedId);
+                            
+                            
+
+                            isScheduleExist++;
+                        }
+
+                    }
+                    
+                    if (isScheduleExist == 0) {
+
+                        var btn_check = document.getElementById('btn_create_res');
+                        btn_check.style.visibility = "hidden";
+
+                        var sched_time = document.createElement("option");
+                        sched_time.setAttribute("value", "");
+
+                        var sched_time_child = document.createTextNode("NO SCHEDULE AVAILABLE");
+                        sched_time.appendChild(sched_time_child);
+                        sel.appendChild(sched_time);
+                    }
+
+                    
+
+                }
+                else
+                {
+                    var btn_check = document.getElementById('btn_create_res');
+                    btn_check.style.visibility = "hidden";
+
+                    var sched_time = document.createElement("option");
+                    sched_time.setAttribute("value", "");
+
+                    var sched_time_child = document.createTextNode("NO SCHEDULE OPEN");
+                    sched_time.appendChild(sched_time_child);
+                    sel.appendChild(sched_time);
+                }
+
+               
+
+            },
+            error: function (result) {
+                console.log('Mali');
+            }
+        });
+
 
         openDetModal();
         //Load Review Content from active element
         loadReviewContent(document.activeElement);
     };
 }
+
+
+function ReserveRegister() {
+    var a = document.getElementById("place_schedule").selectedIndex;
+    var y = document.getElementById("place_schedule").options;
+    var indexPlace = y[a].index;
+    var user_id =  localStorage.getItem("UserId");
+    var sched_id = localStorage.getItem("skidID" + indexPlace);
+    var info = {
+        schedId: sched_id,
+        userId: user_id
+    };
+
+    console.log(sched_id);
+    console.log(info);
+    
+    $.ajax({
+        type: 'POST',
+        url: urlData + '/AddReserveDetails',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({ res: info }),
+        dataType: 'json',
+        processdata: true,
+        success: function (data) {
+
+            closeDetModal();
+            alert(data.d);
+
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+        }
+    });
+    
+}
+
+
 //Create 5 for now
 function loadProcNavContent() {
 
-    var parent = document.getElementById("proc_nav_content_wrapper");
-    parent.innerHTML = "";
+    var searchBox = $('#txtBox_input').val();
+    var ctr;
 
-    //Load Content
-    for (let i = 0; i < 5; i++) {
-        const newDiv = document.createElement("div");
-        newDiv.tabIndex = i;
-        newDiv.className = "place";
-        newDiv.setAttribute("onclick", "checkFocusedPlace()");
+    $.ajax({
+        type: 'post',
+        url: urlData + '/DisplayNameProvinceCity',
+        data: JSON.stringify({ search: searchBox }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        processdata: true,
+        success: function (data) {
 
-        //Court Image
-        const child1 = document.createElement("img");
-        child1.src = "../www/images/bc2.jpg";
+            if (data.d.length != 0)  //if data has results
+            {
+                var parent = document.getElementById("proc_nav_content_wrapper");
+                parent.innerHTML = "";
 
-        //Court Name
-        const child2 = document.createElement("h3");
-        child2.textContent = "El" + parseInt(Math.random() * 100) + " Court";
+                //Load Content
+                for (let i = 0; i < data.d.length; i++) {
+                    localStorage.setItem("Court" + i, data.d[i].CourtId);
 
-        //Stars
-        const child3 = document.createElement("div");
-        child3.className = "place-star-container";
-        const child3_1 = document.createElement("div");
-        child3_1.className = "place-star-wrap";
+                    const newDiv = document.createElement("div");
+                    newDiv.tabIndex = i;
+                    newDiv.className = "place";
+                    newDiv.setAttribute("onclick", "checkFocusedPlace()");
 
-        starDisp(Math.random() * 5, child3_1);
+                    //Court Image
+                    const child1 = document.createElement("img");
+                    child1.src = "../www/images/bc4.jpg";
 
-        child3.append(child3_1);
+                    //Court Name
+                    const child2 = document.createElement("h4");
+                    child2.textContent = data.d[i].Name;
 
-        newDiv.append(child1);
-        newDiv.append(child2);
-        newDiv.append(child3);
+                    //Stars
+                    const child3 = document.createElement("div");
+                    child3.className = "place-star-container";
+                    const child3_1 = document.createElement("div");
+                    child3_1.className = "place-star-wrap";
 
-        parent.append(newDiv);
-    }
+                    starDisp(Math.random() * 5, child3_1);
+
+
+                    const child4 = document.createElement("h6");
+                    child4.textContent = data.d[i].Province + "," + data.d[i].City;
+
+                    child3.append(child3_1);
+
+
+                    newDiv.append(child1);
+                    newDiv.append(child2);
+                    newDiv.append(child4);
+                    newDiv.append(child3);
+
+
+                    parent.append(newDiv);
+                }
+            }
+            else
+            {
+                var parent = document.getElementById("proc_nav_content_wrapper");
+                parent.innerHTML = "";
+
+                const child = document.createElement("h3");
+                child.textContent = 'No Results';
+
+                parent.append(child);
+            }
+            
+
+        },
+        error: function (result) {
+            console.log('Mali');
+        }
+    });
+
+   
 }
 //SortBy courtName and Ratings for now
 function reloadProcNavContent() {
@@ -221,17 +403,76 @@ function loadReviewContent(x) {
     var z = document.getElementsByClassName("review-header-wrap");
     //Court Name from active element x
     z[0].children[0].textContent = "Reviews For " + x.children[1].textContent;
-    //Number of Reviews
-    z[0].children[1].textContent = 2 + " Reviews";
-    //Load Review content
+    var index = x.tabIndex;
+    var c = localStorage.getItem("Court" + index);
 
-    var parent = document.getElementById("review-wrapper");
-    parent.innerHTML = "";
-    //Test to create 5
-    for (let i = 0; i < 5; i++)
-        createReviewContent();
-    //Need to pass userID into this function, none for now
-    //e.g createReviewContent(userID)
+
+
+    $.ajax({
+        type: 'post',
+        url: urlData + '/DisplayCourtFeedbacks',
+        data: JSON.stringify({ court_id: c }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        processdata: true,
+        success: function (data) {
+
+            //Number of Reviews
+            z[0].children[1].textContent = data.d.length + " Review/s";
+            //Load Review content
+
+            var parent = document.getElementById("review-wrapper");
+            parent.innerHTML = "";
+            //Test to create 5
+            for (let i = 0; i < data.d.length; i++)
+            {
+                var parent = document.getElementById("review-wrapper");
+                //clear contents
+
+                var child = document.createElement("div");
+                child.className = "review-content";
+
+                var child_1 = document.createElement("div");
+                child_1.className = "star-container";
+
+                var child_1_1 = document.createElement("div");
+                child_1_1.className = "star-wrap";
+
+                //Get number of stars through this query 3.5 for now as placeholder
+                starDisp(data.d[i].Stars, child_1_1);
+
+                var child_2 = document.createElement("div");
+                child_2.className = "feedback-container";
+
+                var child_2_1 = document.createElement("h3");
+                child_2_1.textContent = " By " + data.d[i].Name;
+
+                var child_2_2 = document.createElement("p");
+                child_2_2.textContent = data.d[i].Comments;
+
+                var child_2_3 = document.createElement("h5");
+                child_2_3.textContent = data.d[i].Date;
+
+                child_1.append(child_1_1);
+
+                child.append(child_1);
+
+                child_2.append(child_2_1);
+                child_2.append(child_2_2);
+                child_2.append(child_2_3);
+
+                child.append(child_2);
+
+                parent.append(child);
+            }
+
+        },
+        error: function (result) {
+            console.log('Mali');
+        }
+    });
+
+    
 }
 //Function to create stars
 function starDisp(num, parent) {
@@ -277,6 +518,8 @@ function createReviewContent() {
             </div>
         </div>
         */
+    
+
     var parent = document.getElementById("review-wrapper");
     //clear contents
 

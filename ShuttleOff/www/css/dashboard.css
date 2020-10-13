@@ -384,11 +384,32 @@ body {
         width: 100%;
     }
 
-    .place h3 {
+    .place h2 {
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 0;
         padding: 10px;
+    }
+
+    .place h3 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px
+    }
+
+    .place h4 {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 10px;
+    }
+
+    .place h6 {
+        position: absolute;
+        top: 90px;
+        left: 0;
+        padding: 10px
     }
 
 .place-star-container {

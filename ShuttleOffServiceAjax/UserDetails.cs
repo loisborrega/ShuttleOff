@@ -31,6 +31,20 @@ namespace ShuttleOffServiceAjax
             return string.Empty;
         }
 
+        public static int SafeGetInt16(this SqlDataReader reader, int index)
+        {
+            if (!reader.IsDBNull(index))
+                return reader.GetInt16(index);
+            return 0;
+        }
+
+        public static int SafeGetByte(this SqlDataReader reader, int index)
+        {
+            if (!reader.IsDBNull(index))
+                return reader.GetByte(index);
+            return 0;
+        }
+
         public static int SafeGetInt32(this SqlDataReader reader, int index)
         {
             if (!reader.IsDBNull(index))
@@ -38,11 +52,20 @@ namespace ShuttleOffServiceAjax
             return 0;
         }
 
-        public static DateTime? SafeGetDateTime(this SqlDataReader reader, int index)
+        public static TimeSpan? SafeGetTime(this SqlDataReader reader, int index)
         {
             if (!reader.IsDBNull(index))
-                return reader.GetDateTime(index);
+                return reader.GetTimeSpan(index);
             return null;
+        }
+
+        public static DateTime SafeGetDateTime(this SqlDataReader reader, int index)
+        {
+            DateTime dat = new DateTime();
+
+            if (!reader.IsDBNull(index))
+                return reader.GetDateTime(index);
+            return dat;
         }
 
         public static object ToDbParameter<T>(this T? value)
