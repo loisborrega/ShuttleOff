@@ -261,13 +261,13 @@ namespace ShuttleOffService
             using (SqlCommand command = new SqlCommand("CourtOwner.AddCourtSchedules", connection))
             {
                 string message;
-                
+
                 connection.Open();
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("CourtId", SqlDbType.Int).Value = CourtID.ToDbParameter();
-                command.Parameters.Add("Starttime", SqlDbType.Time, 7).Value = StartTime.ToDbParameter();
-                command.Parameters.Add("Endtime", SqlDbType.Time, 7).Value = EndTime.ToDbParameter();
-                command.Parameters.Add("Date", SqlDbType.Date).Value = SchedDate.ToDbParameter();
+                command.Parameters.Add("Starttime", SqlDbType.NVarChar, 15).Value = StartTime.ToDbParameter();
+                command.Parameters.Add("Endtime", SqlDbType.NVarChar, 15).Value = EndTime.ToDbParameter();
+                command.Parameters.Add("Date", SqlDbType.NVarChar, 15).Value = SchedDate.ToDbParameter();
 
                 int result = command.ExecuteNonQuery();
                 if (result == 1)
@@ -286,6 +286,497 @@ namespace ShuttleOffService
         public void AddCourtSchedUponCourtRegOptions()
         { }
 
+        //==============================================================================================
+        public string DisplayCourtOwner(string userID)
+        {
+            string json;
+            List<CourtDetails> log = new List<CourtDetails>();
+
+            int user_id1 = int.Parse(userID);
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("[CourtOwner].[GetCourtDetailsByUserID]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("user", user_id1);
+
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    CourtDetails p = new CourtDetails();
+
+                    p.CourtID = rdr.SafeGetInt32(0);
+
+                    p.CName = rdr.SafeGetString(1);
+                    p.CProvince = rdr.SafeGetString(2);
+                    p.CCity = rdr.SafeGetString(3);
+                    int a = rdr.SafeGetByte(4);
+                    p.CCapacity = a.ToString();
+                    p.CAddress = rdr.SafeGetString(5);
+                    p.CDesc = rdr.SafeGetString(6);
+                    log.Add(p);
+                }
+
+                con.Close();
+
+            }
+            json = JsonConvert.SerializeObject(log);
+
+            return json;
+        }
+
+        public void DisplayCourtOwnerOptions()
+        { }
+
+        public string DisplaySchedDetails(string court_id)
+        {
+            string json;
+            List<CourtDetails> log = new List<CourtDetails>();
+
+            int user_id1 = int.Parse(court_id);
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("[CourtOwner].[GetCourtSchedulesByCourtID]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("CourtId", court_id);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    TimeSpan? time = new TimeSpan();
+                    DateTime date = new DateTime();
+                    CourtDetails p = new CourtDetails();
+
+                    time = rdr.SafeGetTime(1);
+                    p.CStartTime = time.ToString();
+
+                    time = rdr.SafeGetTime(2);
+                    p.CEndTime = time.ToString();
+
+                    date = rdr.SafeGetDateTime(3);
+                    p.CDateEff = date.ToString("d");
+
+                    p.CStatus = rdr.SafeGetString(4);
+
+                    p.SchedID = rdr.SafeGetInt32(5);
+
+                    log.Add(p);
+                }
+                con.Close();
+
+            }
+            json = JsonConvert.SerializeObject(log);
+
+            return json;
+        }
+
+        public void DisplaySchedDetailsOptions()
+        { }
+
+
+        public string UpdateCourtDetailsInOwners(CourtDetails court_infor)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("[Main].[UpdateCourtDetailsByCourtID]", connection))
+            {
+                string message;
+
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("courtid", SqlDbType.Int).Value = court_infor.CourtID.ToDbParameter();
+                command.Parameters.Add("name", SqlDbType.NVarChar, 90).Value = court_infor.CName.ToDbParameter();
+                int a = int.Parse(court_infor.CCapacity.ToString());
+                command.Parameters.Add("cap", SqlDbType.TinyInt).Value = a.ToDbParameter();
+                command.Parameters.Add("address", SqlDbType.NVarChar, 120).Value = court_infor.CAddress.ToDbParameter();
+                command.Parameters.Add("description", SqlDbType.NVarChar, 250).Value = court_infor.CDesc.ToDbParameter();
+                command.Parameters.Add("province", SqlDbType.NVarChar, 90).Value = court_infor.CProvince.ToDbParameter();
+                command.Parameters.Add("city", SqlDbType.NVarChar, 90).Value = court_infor.CCity.ToDbParameter();
+
+
+                int result = command.ExecuteNonQuery();
+                message = "Court has been updated!";
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void UpdateCourtDetailsInOwnersOptions()
+        { }
+        //================================================================================================================
+        public string UpdateScheduleDetailsByOwner(CourtDetails court_infor)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("[CourtOwner].[UpdateScheduleAndAddByCourtID]", connection))
+            {
+                string message;
+
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("court", SqlDbType.Int).Value = court_infor.CourtID.ToDbParameter();
+                command.Parameters.Add("start", SqlDbType.NVarChar, 15).Value = court_infor.CStartTime.ToDbParameter();
+                command.Parameters.Add("end", SqlDbType.NVarChar, 15).Value = court_infor.CEndTime.ToDbParameter();
+                command.Parameters.Add("date", SqlDbType.NVarChar, 15).Value = court_infor.CDateEff.ToDbParameter();
+
+
+
+                int result = command.ExecuteNonQuery();
+                message = "Schedule has been updated!";
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void UpdateScheduleDetailsByOwnerOptions()
+        { }
+
+
+        //====================================================================================================
+        public string DeleteScheduleByOwner(string sched_id)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("[CourtOwner].[DeleteScheduleByScheduleID]", connection))
+            {
+                string message;
+                int a = int.Parse(sched_id);
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("sched", SqlDbType.Int).Value = a.ToDbParameter();
+
+
+                int result = command.ExecuteNonQuery();
+                message = "hello";
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void DeleteScheduleByOwnerOptions()
+        { }
+
+        //==============================================================================================
+        public string DeleteCourtByOwner(string court_id)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("[CourtOwner].[DeleteCourtByCourtID]", connection))
+            {
+                string message;
+                int a = int.Parse(court_id);
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("court", SqlDbType.Int).Value = a.ToDbParameter();
+
+
+                int result = command.ExecuteNonQuery();
+                message = "hello";
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void DeleteCourtByOwnerOptions()
+        { }
+
+
+        //==================================================================================================
+        public string DisplayReservation(string user_id)
+        {
+            string json;
+            List<ReservationDetails> log = new List<ReservationDetails>();
+
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("[Main].[GetActiveReserveDetailsByUserID]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("user", user_id);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    TimeSpan? time = new TimeSpan();
+                    DateTime date = new DateTime();
+                    ReservationDetails p = new ReservationDetails();
+                    p.Name = rdr.SafeGetString(0);
+                    p.Province = rdr.SafeGetString(1);
+                    p.City = rdr.SafeGetString(2);
+
+                    time = rdr.SafeGetTime(3);
+                    p.StartTime = time.ToString();
+
+                    time = rdr.SafeGetTime(4);
+                    p.EndTime = time.ToString();
+
+                    date = rdr.SafeGetDateTime(5);
+                    p.DateEffective = date.ToString("d");
+
+                    p.Address = rdr.SafeGetString(6);
+                    p.Status = rdr.SafeGetString(7);
+                    p.reserveId = rdr.SafeGetInt32(8);
+                    p.courtId = rdr.SafeGetInt32(9);
+                    p.schedId = rdr.SafeGetInt32(10);
+
+                    log.Add(p);
+                }
+                con.Close();
+
+            }
+            json = JsonConvert.SerializeObject(log);
+
+            return json;
+        }
+
+        public void DisplayReservationOptions()
+        { }
+
+
+        //====================================================================================================
+        public string DisplayPastReservation(string user_id)
+        {
+            string json;
+            List<ReservationDetails> log = new List<ReservationDetails>();
+
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("[Main].[GetPastReserveDetailsByUserID]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("user", user_id);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    TimeSpan? time = new TimeSpan();
+                    DateTime date = new DateTime();
+                    ReservationDetails p = new ReservationDetails();
+                    p.Name = rdr.SafeGetString(0);
+                    p.Province = rdr.SafeGetString(1);
+                    p.City = rdr.SafeGetString(2);
+
+                    time = rdr.SafeGetTime(3);
+                    p.StartTime = time.ToString();
+
+                    time = rdr.SafeGetTime(4);
+                    p.EndTime = time.ToString();
+
+                    date = rdr.SafeGetDateTime(5);
+                    p.DateEffective = date.ToString("d");
+
+                    p.Address = rdr.SafeGetString(6);
+                    p.Status = rdr.SafeGetString(7);
+                    p.reserveId = rdr.SafeGetInt32(8);
+                    p.courtId = rdr.SafeGetInt32(9);
+                    p.schedId = rdr.SafeGetInt32(10);
+
+                    log.Add(p);
+                }
+                con.Close();
+
+            }
+            json = JsonConvert.SerializeObject(log);
+
+            return json;
+        }
+
+        public void DisplayPastReservationOptions()
+        { }
+
+
+        //===================================================================================================
+        public string AddFeedbackDetails(string user_id, string court_id, string reserve_id, string sched_id, string ratings, string comments)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("[Main].[AddFeedBackDeletePastReservationAndUpdateSchedule]", connection))
+            {
+                string message;
+                int a = int.Parse(user_id);
+                int b = int.Parse(court_id);
+                int c = int.Parse(reserve_id);
+                int d = int.Parse(ratings);
+                int e = int.Parse(sched_id);
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("user", SqlDbType.Int).Value = a.ToDbParameter();
+                command.Parameters.Add("court", SqlDbType.Int).Value = b.ToDbParameter();
+                command.Parameters.Add("ratings", SqlDbType.TinyInt).Value = d.ToDbParameter();
+                command.Parameters.Add("comments", SqlDbType.NVarChar, 250).Value = comments.ToDbParameter();
+
+                command.Parameters.Add("date", SqlDbType.DateTime).Value = DateTime.Now;
+                command.Parameters.Add("reserv", SqlDbType.Int).Value = c.ToDbParameter();
+                command.Parameters.Add("sched", SqlDbType.Int).Value = e.ToDbParameter();
+
+
+                int result = command.ExecuteNonQuery();
+                message = "hello";
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void AddFeedbackDetailsOptions()
+        { }
+
+        //==========================================================================================================
+        public string DeleteReserveDetails(string reserve_id)
+        {
+            string msg = "";
+            int a = int.Parse(reserve_id);
+            SqlConnection con = new SqlConnection(connString);
+            con.Open();
+
+            SqlCommand command = new SqlCommand("[Main].[DeleteReserveDetailsAndUpdateCourtSchedule]", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("@reserve", SqlDbType.Int).Value = a.ToDbParameter();
+
+            command.ExecuteNonQuery();
+
+            con.Close();
+
+            return msg = "Reservation Removed!";
+        }
+
+        public void DeleteReserveDetailsOptions()
+        { }
+
+        //==============================================================================================
+        public string UpdateScheduleDates()
+        {
+            string json = string.Empty;
+            string timeToday_s;
+
+            DateTime today = DateTime.Today;
+
+            DateTime t = DateTime.Now;
+            timeToday_s = t.ToString("HH:mm:ss");
+            TimeSpan timeToday = TimeSpan.Parse(timeToday_s);
+
+            DateTime scheduleDate;
+
+            List<ReservationDetails> log = new List<ReservationDetails>();
+
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+
+                SqlCommand cmd = new SqlCommand("[Main].[GetDateInCourtSchedules]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    TimeSpan? time = new TimeSpan();
+                    DateTime date = new DateTime();
+                    ReservationDetails p = new ReservationDetails();
+
+                    p.schedId = rdr.SafeGetInt32(0);
+
+                    date = rdr.SafeGetDateTime(1);
+                    p.DateEffective = date.ToString("d");
+
+                    p.reserveId = rdr.SafeGetByte(2);
+
+                    time = rdr.SafeGetTime(3);
+                    p.EndTime = time.ToString();
+                    log.Add(p);
+                }
+                con.Close();
+
+
+                for (int i = 0; i < log.Count; i++)
+                {
+                    scheduleDate = DateTime.Parse(log[i].DateEffective);
+                    TimeSpan end = TimeSpan.Parse(log[i].EndTime);
+                    if (today > scheduleDate) // if schedule time is already past to date
+                    {
+
+                        if (log[i].reserveId == 2 || log[i].reserveId == 1)
+                        {
+                            cmd = new SqlCommand("[Main].[SetReservationStatusAndReservationDetails]", con);
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            con.Open();
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("res", SqlDbType.TinyInt).Value = log[i].reserveId.ToDbParameter();
+                            cmd.Parameters.Add("sched", SqlDbType.Int).Value = log[i].schedId.ToDbParameter();
+
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+
+
+                        }
+
+                    }
+                    else
+                    {
+                        int a = TimeSpan.Compare(end, timeToday);
+
+                        if (a < 0) // if schedule endtime is already past to date
+                        {
+
+                            if (log[i].reserveId == 2 || log[i].reserveId == 1)
+                            {
+                                cmd = new SqlCommand("[Main].[SetReservationStatusAndReservationDetails]", con);
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                con.Open();
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.Add("res", SqlDbType.TinyInt).Value = log[i].reserveId.ToDbParameter();
+                                cmd.Parameters.Add("sched", SqlDbType.Int).Value = log[i].schedId.ToDbParameter();
+
+                                cmd.ExecuteNonQuery();
+                                con.Close();
+
+
+                            }
+                        }
+                    }
+
+                }
+
+            }
+            
+            return json;
+
+        }
+
+        public void UpdateScheduleDatesOptions()
+        { }
+        //=================================================================================================
+        public string DeleteAccountAndConnection(string user_id)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = new SqlCommand("[Main].[DeleteAccountByUserID]", connection))
+            {
+                string message;
+                int a = int.Parse(user_id);
+                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("user", SqlDbType.Int).Value = a.ToDbParameter();
+
+
+                int result = command.ExecuteNonQuery();
+                message = "hello";
+                connection.Close();
+                return message;
+            }
+        }
+
+        public void DeleteAccountAndConnectionOptions()
+        { }
+
+
     }
     public static class DBUtils   // database fetch usable methods (for nullable rows)
     {
@@ -296,11 +787,41 @@ namespace ShuttleOffService
             return string.Empty;
         }
 
-        public static DateTime? SafeGetDateTime(this SqlDataReader reader, int index)
+        public static int SafeGetInt16(this SqlDataReader reader, int index)
         {
             if (!reader.IsDBNull(index))
-                return reader.GetDateTime(index);
+                return reader.GetInt16(index);
+            return 0;
+        }
+
+        public static int SafeGetByte(this SqlDataReader reader, int index)
+        {
+            if (!reader.IsDBNull(index))
+                return reader.GetByte(index);
+            return 0;
+        }
+
+        public static int SafeGetInt32(this SqlDataReader reader, int index)
+        {
+            if (!reader.IsDBNull(index))
+                return reader.GetInt32(index);
+            return 0;
+        }
+
+        public static TimeSpan? SafeGetTime(this SqlDataReader reader, int index)
+        {
+            if (!reader.IsDBNull(index))
+                return reader.GetTimeSpan(index);
             return null;
+        }
+
+        public static DateTime SafeGetDateTime(this SqlDataReader reader, int index)
+        {
+            DateTime dat = new DateTime();
+
+            if (!reader.IsDBNull(index))
+                return reader.GetDateTime(index);
+            return dat;
         }
 
         public static object ToDbParameter<T>(this T? value)

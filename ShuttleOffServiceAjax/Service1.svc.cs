@@ -402,7 +402,69 @@ namespace ShuttleOffServiceAjax
 
             return msg = "Past Reservation Removed!";
         }
+
+
+        [OperationContract]
+        public List<CourtDetails> DisplayCourtOwnerDetails(string user_id)
+        {
+            List<CourtDetails> log = new List<CourtDetails>();
+            int user_id1 = 1020;
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand("[CourtOwner].[GetCourtDetailsByUserID]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("user", user_id1);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    CourtDetails p = new CourtDetails();
+
+                    p.CourtId = rdr.SafeGetInt32(0);
+                    p.Name = rdr.SafeGetString(1);
+                    p.Province = rdr.SafeGetString(2);
+                    p.City = rdr.SafeGetString(3);
+                    p.Capacity = rdr.SafeGetByte(4);
+                    p.Address = rdr.SafeGetString(5);
+                    p.Description = rdr.SafeGetString(6);
+
+                    log.Add(p);
+                }
+                con.Close();
+
+            }
+
+            return log;
+        }
+
+        [OperationContract]
+        public string AddCourtDetails(CourtDetails courtInfo, string userID)
+        {
+            
+                return "hello";
+            
+        }
         //[OperationContract]
+
+        //[OperationContract]
+
+        //[OperationContract]
+
+        //[OperationContract]
+
+        //[OperationContract]
+
+        //[OperationContract]
+
+        //[OperationContract]
+
+        //[OperationContract]
+
+        //[OperationContract]
+
+
 
         // Add more operations here and mark them with [OperationContract]
     }

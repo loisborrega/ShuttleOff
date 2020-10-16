@@ -200,6 +200,33 @@ function ValidateCurrentPW() {
         }
     }
 }
+function DeleteAccount() {
+    var c = localStorage.getItem("UserId");
+    
+    var r = confirm("Are you sure you want to DELETE your Account?");
+    if (r == true) {
+        
+        $.ajax({
+            type: 'POST',
+            url: urlData + '/DeleteAccountAndConnection',
+            data: JSON.stringify({ user_id: c }),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            processdata: true,
+            success: function (data) {
+                var value = data;
+                window.close = "profile.html";
+                window.location = "index.html";   
+            },
+        error: function (result) {
+                alert(result.responseText);
+            }
+        });
+        
+       
+    }
+    
+}
 
 function UpdateUserPasswordClicked() {
     var userInfoJSON = {
@@ -211,7 +238,7 @@ function UpdateUserPasswordClicked() {
 
     $.ajax({
         type: 'POST',
-        url: urlData + 'UpdateUserPassword',
+        url: urlData + '/UpdateUserPassword',
         data: JSON.stringify(userInfoJSON),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',

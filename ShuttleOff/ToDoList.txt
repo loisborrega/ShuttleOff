@@ -2,4 +2,19 @@
 pag pindot yung court gagawa ako stored proc na getDetails tapos iseset ko doon (SIGURO GUMAMIT KA NG LIST)
 
 
-provincename nvarchar(50)
+
+TO FIXED:
+YUNG PAG DELETE NG RESERVATION MAY ERROR DON!!!!!!!!!
+PAG NAG DELETE ANG COURT DAPAT DELETED LAHAT NG RELATIONSHIP
+YUNG  PAG LOAD NG HISTORY DAPAT MGA COURT LANG NG SINALIHAN MO
+
+
+if yung date ngayon ay mas mataas sa date dun sa schedule magiging "Past(3)" yung courtschedule, tapos magiging
+"Past(2)" yung reservation details.
+if 1(available) yung reservationstatus, gagawin kong 3 or Past
+if 2(reserved) yung reservationstatus, gagawin kong 3 or past at 2 yung reservation details
+
+
+startTime EndTime DateEff and courtId
+
+

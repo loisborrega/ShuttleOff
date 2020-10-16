@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-
+    <!--
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        -->
     <link rel="stylesheet" href="css/profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
@@ -39,7 +40,7 @@
                             <h5 id="FirstNameH5"></h5>
                         </div>
                         <div class="join-loc-container">
-                            <div class="join-loc-wrap">                                
+                            <div class="join-loc-wrap">
                                 <div class="profile-location-container">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <h6 id="UserLocH6"></h6>
@@ -57,7 +58,7 @@
                         <div class="profile-content">
                             <h3>Email</h3>
                             <input type="text" id="email" placeholder="Email Address" readonly>
-                        </div>                        
+                        </div>
                         <div class="profile-content">
                             <h5 onclick="openEditProfile()">Edit Profile</h5>
                         </div>
@@ -107,7 +108,7 @@
                                 <h5 onclick="ResetFieldsClicked()" id="reset_fields">Reset Fields</h5>
                                 <h5 onclick="UpdateUserDetailsClicked()" id="sav_chngs">Save Changes</h5>
                                 <h5 onclick="openChangePassPanel()" id="chng_pass">Change Password</h5>
-                                <h5 id="del_acc">Delete Account</h5>
+                                <h5 onclick="DeleteAccount()" id="del_acc">Delete Account</h5>
                             </div>
                         </div>
                     </div>
@@ -145,13 +146,14 @@
 
     <!--Scripts-->
     <script type="text/javascript" src="scripts/jquery.js"></script>
+    <!--
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/platformOverrides.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
-
+        -->
     <script src="https://kit.fontawesome.com/fec759ef55.js" crossorigin="anonymous"></script>
     <script src="scripts/profile.js"></script>
 </body>

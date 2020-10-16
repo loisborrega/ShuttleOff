@@ -2,17 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation</title>
-
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/reservation.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-
-    <script src="https://use.fontawesome.com/8bc8e090b5.js"></script>
 </head>
-<body onload="ReserveOnLoad()">
+<body>
     <div class="content">
         <div class="app-header">
             <div class="container">
@@ -61,6 +56,48 @@
                         <div id="pane2">
                             <div class="pane2-wrap">
                                 <h2 class="empty-pane">Nothing to see here...</h2>
+                                <!-- <div tabindex = 0 class="pane2-content">
+                                    <div class="pane2-content-wrap">
+                                        <i class="fas fa-map-marker-alt">&nbsp;Court Name</i>
+                                        <i class="far fa-clock">&nbsp;10PM - 11PM</i>
+                                        <span><i onclick = "openReviewModal()" class="fas fa-comment-alt"></i></span>
+                                    </div>
+                                </div>
+                                <div class="court-address">
+                                    <h4>Address</h4>
+                                    <p>Lorem Ipsum</p>
+                                </div> -->
+                            </div>
+                            <!-- Review Modal -->
+                            <div class="review-mod">
+                                <div class="rv-mod-wr">
+                                    <div class="rv-mod-hd">
+                                        <div class="rv-mod-hd-wr">
+                                            <h2>Leave a Review!</h2>
+                                        </div>
+                                    </div>
+                                    <div class="rv-mod-body">
+                                        <div class="rv-mod-bod-wr">
+                                            <h3>Court Name</h3>
+                                            <div class="star-cont">
+                                                <div class="star-wrap">
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                </div>
+                                            </div>
+                                            <textarea cols="20" rows="1" placeholder="Please be nice UwU"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="rv-mod-btn-cont">
+                                        <div class="rv-mod-btn-wr">
+                                            <button class="rv-btn">Cancel</button>
+                                            <button class="rv-btn">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,14 +105,7 @@
             </div>
         </div>
     </div>
-    <!-- Scripts -->
     <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="scripts/bootstrap.js"></script>
-
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
-
     <script src="https://kit.fontawesome.com/fec759ef55.js" crossorigin="anonymous"></script>
     <script src="scripts/reservation.js"></script>
 </body>

@@ -1,7 +1,7 @@
 ﻿
 
 //var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-//var urlData = 'http://localhost:54458/Service1.svc'; // Lois
+var urlData_lois = 'http://localhost:54458/Service1.svc'; // Lois
 //var urlData = 'http://localhost/ShuttleOffService/Service1.svc'; // IIS HOST
 var urlData = 'http://localhost:50869/Service1.svc' // Almer Service
 
@@ -13,6 +13,25 @@ var slideIndex = 0;
 /*Functions to Initialize*/
 showSlides();
 showDateTime();
+
+function loadUpdatedSchedule() {
+    $.ajax({
+        type: 'POST',
+        url: urlData_lois + '/UpdateScheduleDates',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        processdata: true,
+        success: function (data) {
+            var value = data;
+        },
+        error: function (result) {
+            alert(result.responseText);
+        }
+    });
+}
+
+
+
 function showSlides() {
 
     var i;
@@ -124,7 +143,7 @@ function checkFocusedPlace() {
                 details[5].innerHTML = data.d[0].Address;
                 details[6].innerHTML = data.d[0].Description;
 
-                console.log(data.d[0].StartTime );
+                //console.log(data.d[0].StartTime );
 
                 var btn_check = document.getElementById('btn_create_res');
                 btn_check.style.visibility = "visible";
@@ -194,7 +213,7 @@ function checkFocusedPlace() {
 
             },
             error: function (result) {
-                console.log('Mali');
+                console.log(result);
             }
         });
 
@@ -217,8 +236,8 @@ function ReserveRegister() {
         userId: user_id
     };
 
-    console.log(sched_id);
-    console.log(info);
+    //console.log(sched_id);
+    //console.log(info);
     
     $.ajax({
         type: 'POST',
@@ -316,7 +335,7 @@ function loadProcNavContent() {
 
         },
         error: function (result) {
-            console.log('Mali');
+            console.log(result);
         }
     });
 
@@ -468,7 +487,7 @@ function loadReviewContent(x) {
 
         },
         error: function (result) {
-            console.log('Mali');
+            console.log(result);
         }
     });
 
