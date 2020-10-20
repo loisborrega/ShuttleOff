@@ -1,6 +1,7 @@
 ﻿//var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-var urlData = 'http://localhost:54458/Service1.svc';
+//var urlData = 'http://localhost:54458/Service1.svc';
 //var urlData = 'http://localhost/ShuttleOffService/Service1.svc';
+var urlData = 'http://192.168.254.127/ShuttleOffService/Service1.svc';
 //var urlData_Almer = 'http://localhost:50869/Service1.svc'; // Almer Service
 
 /*<===================== Non Dynamic Element Helpers ========================>*/

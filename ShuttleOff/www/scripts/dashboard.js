@@ -1,9 +1,12 @@
 ﻿
 
 //var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
-var urlData_lois = 'http://localhost:54458/Service1.svc'; // Lois
-//var urlData = 'http://localhost/ShuttleOffService/Service1.svc'; // IIS HOST
-var urlData = 'http://localhost:50869/Service1.svc' // Almer Service
+//var urlData_lois = 'http://localhost:54458/Service1.svc'; // Lois
+//var urlData_lois = 'http://localhost/ShuttleOffService/Service1.svc'; // IIS HOST
+var urlData_lois = 'http://192.168.254.127/ShuttleOffService/Service1.svc';
+//var urlData = 'http://localhost:50869/Service1.svc'; // Almer Service
+//var urlData = 'http://localhost/ShuttleOffServiceAjax/Service1.svc';
+var urlData = 'http://192.168.254.127/ShuttleOffServiceAjax/Service1.svc';
 
 /*Global Variables */
 var slideIndex = 0;

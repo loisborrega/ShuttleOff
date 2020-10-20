@@ -717,8 +717,10 @@ namespace ShuttleOffService
                         }
 
                     }
-                    else
+                    else if(today == scheduleDate) // if date is same check time
                     {
+                      
+
                         int a = TimeSpan.Compare(end, timeToday);
 
                         if (a < 0) // if schedule endtime is already past to date
@@ -740,6 +742,10 @@ namespace ShuttleOffService
 
                             }
                         }
+                    }
+                    else // if date is not same not past
+                    {
+                        json = "nothing";
                     }
 
                 }
