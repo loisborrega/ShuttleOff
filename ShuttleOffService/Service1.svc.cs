@@ -18,8 +18,8 @@ namespace ShuttleOffService
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service1 : IService1
     {
-        //private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
-        private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
+        //private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
 
         // VERIFY LOGIN AND GET USER DETAILS        
         public string UserLogin(UserDetails userLog)
@@ -295,7 +295,7 @@ namespace ShuttleOffService
             int user_id1 = int.Parse(userID);
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[CourtOwner].[GetCourtDetailsByUserID]", con);
+                SqlCommand cmd = new SqlCommand("CourtOwner.GetCourtDetailsByUserID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("user", user_id1);
@@ -338,7 +338,7 @@ namespace ShuttleOffService
             int user_id1 = int.Parse(court_id);
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[CourtOwner].[GetCourtSchedulesByCourtID]", con);
+                SqlCommand cmd = new SqlCommand("CourtOwner.GetCourtSchedulesByCourtID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("CourtId", court_id);
@@ -382,7 +382,7 @@ namespace ShuttleOffService
         {
 
             using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand("[Main].[UpdateCourtDetailsByCourtID]", connection))
+            using (SqlCommand command = new SqlCommand("Main.UpdateCourtDetailsByCourtID", connection))
             {
                 string message;
 
@@ -412,7 +412,7 @@ namespace ShuttleOffService
         {
 
             using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand("[CourtOwner].[UpdateScheduleAndAddByCourtID]", connection))
+            using (SqlCommand command = new SqlCommand("CourtOwner.UpdateScheduleAndAddByCourtID", connection))
             {
                 string message;
 
@@ -441,7 +441,7 @@ namespace ShuttleOffService
         {
 
             using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand("[CourtOwner].[DeleteScheduleByScheduleID]", connection))
+            using (SqlCommand command = new SqlCommand("CourtOwner.DeleteScheduleByScheduleID", connection))
             {
                 string message;
                 int a = int.Parse(sched_id);
@@ -465,7 +465,7 @@ namespace ShuttleOffService
         {
 
             using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand("[CourtOwner].[DeleteCourtByCourtID]", connection))
+            using (SqlCommand command = new SqlCommand("CourtOwner.DeleteCourtByCourtID", connection))
             {
                 string message;
                 int a = int.Parse(court_id);
@@ -493,7 +493,7 @@ namespace ShuttleOffService
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[Main].[GetActiveReserveDetailsByUserID]", con);
+                SqlCommand cmd = new SqlCommand("Main.GetActiveReserveDetailsByUserID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("user", user_id);
@@ -546,7 +546,7 @@ namespace ShuttleOffService
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[Main].[GetPastReserveDetailsByUserID]", con);
+                SqlCommand cmd = new SqlCommand("Main.GetPastReserveDetailsByUserID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("user", user_id);
@@ -596,7 +596,7 @@ namespace ShuttleOffService
         {
 
             using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand("[Main].[AddFeedBackDeletePastReservationAndUpdateSchedule]", connection))
+            using (SqlCommand command = new SqlCommand("Main.AddFeedBackDeletePastReservationAndUpdateSchedule", connection))
             {
                 string message;
                 int a = int.Parse(user_id);
@@ -634,7 +634,7 @@ namespace ShuttleOffService
             SqlConnection con = new SqlConnection(connString);
             con.Open();
 
-            SqlCommand command = new SqlCommand("[Main].[DeleteReserveDetailsAndUpdateCourtSchedule]", con);
+            SqlCommand command = new SqlCommand("Main.DeleteReserveDetailsAndUpdateCourtSchedule", con);
             command.CommandType = CommandType.StoredProcedure;
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.Add("@reserve", SqlDbType.Int).Value = a.ToDbParameter();
@@ -668,7 +668,7 @@ namespace ShuttleOffService
             using (SqlConnection con = new SqlConnection(connString))
             {
 
-                SqlCommand cmd = new SqlCommand("[Main].[GetDateInCourtSchedules]", con);
+                SqlCommand cmd = new SqlCommand("Main.GetDateInCourtSchedules", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 con.Open();
@@ -702,7 +702,7 @@ namespace ShuttleOffService
 
                         if (log[i].reserveId == 2 || log[i].reserveId == 1)
                         {
-                            cmd = new SqlCommand("[Main].[SetReservationStatusAndReservationDetails]", con);
+                            cmd = new SqlCommand("Main.SetReservationStatusAndReservationDetails", con);
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             con.Open();
@@ -728,7 +728,7 @@ namespace ShuttleOffService
 
                             if (log[i].reserveId == 2 || log[i].reserveId == 1)
                             {
-                                cmd = new SqlCommand("[Main].[SetReservationStatusAndReservationDetails]", con);
+                                cmd = new SqlCommand("Main.SetReservationStatusAndReservationDetails", con);
                                 cmd.CommandType = CommandType.StoredProcedure;
 
                                 con.Open();
@@ -763,7 +763,7 @@ namespace ShuttleOffService
         {
 
             using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = new SqlCommand("[Main].[DeleteAccountByUserID]", connection))
+            using (SqlCommand command = new SqlCommand("Main.DeleteAccountByUserID", connection))
             {
                 string message;
                 int a = int.Parse(user_id);

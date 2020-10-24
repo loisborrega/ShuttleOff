@@ -17,8 +17,8 @@ namespace ShuttleOffServiceAjax
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service1
     {
-        //private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
-        private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["SODB"]?.ConnectionString;
+        //private static string connString = ConfigurationManager.ConnectionStrings["Almer_SODB"]?.ConnectionString;
 
 
         // VERIFY LOGIN AND GET USER DETAILS  
@@ -182,7 +182,7 @@ namespace ShuttleOffServiceAjax
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[Main].[GetCourtNameByDetails]", con);
+                SqlCommand cmd = new SqlCommand("Main.GetCourtNameByDetails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("name", search);
@@ -212,7 +212,7 @@ namespace ShuttleOffServiceAjax
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[CourtOwner].[GetCourtDetailsByCourtID]", con);
+                SqlCommand cmd = new SqlCommand("CourtOwner.GetCourtDetailsByCourtID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("court", court_id);
@@ -263,7 +263,7 @@ namespace ShuttleOffServiceAjax
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[Main].[GetUserFeedbacksByCourtID]", con);
+                SqlCommand cmd = new SqlCommand("Main.GetUserFeedbacksByCourtID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("court", court_id);
@@ -300,7 +300,7 @@ namespace ShuttleOffServiceAjax
             SqlConnection con = new SqlConnection(connString);
             con.Open();
 
-            SqlCommand command = new SqlCommand("[Main].[AddReservationDetailsAndUpdateCourtSchedule]", con);
+            SqlCommand command = new SqlCommand("Main.AddReservationDetailsAndUpdateCourtSchedule", con);
             command.CommandType = CommandType.StoredProcedure;
             var date = DateTime.Now;
             command.CommandType = CommandType.StoredProcedure;
@@ -326,7 +326,7 @@ namespace ShuttleOffServiceAjax
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[Main].[GetReserveDetailsByUserID]", con);
+                SqlCommand cmd = new SqlCommand("Main.GetActiveReserveDetailsByUserID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("user", user_id);
@@ -371,7 +371,7 @@ namespace ShuttleOffServiceAjax
             SqlConnection con = new SqlConnection(connString);
             con.Open();
 
-            SqlCommand command = new SqlCommand("[Main].[DeleteReserveDetailsAndUpdateCourtSchedule]", con);
+            SqlCommand command = new SqlCommand("Main.DeleteReserveDetailsAndUpdateCourtSchedule", con);
             command.CommandType = CommandType.StoredProcedure;
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.Add("@reserve", SqlDbType.Int).Value = reserve_id;
@@ -391,7 +391,7 @@ namespace ShuttleOffServiceAjax
             SqlConnection con = new SqlConnection(connString);
             con.Open();
 
-            SqlCommand command = new SqlCommand("[Main].[DeleteHistoryDetailsByReservationID]", con);
+            SqlCommand command = new SqlCommand("Main.DeleteHistoryDetailsByReservationID", con);
             command.CommandType = CommandType.StoredProcedure;
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.Add("@reserve", SqlDbType.Int).Value = reserve_id;
@@ -411,7 +411,7 @@ namespace ShuttleOffServiceAjax
             int user_id1 = 1020;
             using (SqlConnection con = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("[CourtOwner].[GetCourtDetailsByUserID]", con);
+                SqlCommand cmd = new SqlCommand("CourtOwner.GetCourtDetailsByUserID", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("user", user_id1);
@@ -446,26 +446,5 @@ namespace ShuttleOffServiceAjax
                 return "hello";
             
         }
-        //[OperationContract]
-
-        //[OperationContract]
-
-        //[OperationContract]
-
-        //[OperationContract]
-
-        //[OperationContract]
-
-        //[OperationContract]
-
-        //[OperationContract]
-
-        //[OperationContract]
-
-        //[OperationContract]
-
-
-
-        // Add more operations here and mark them with [OperationContract]
     }
 }
